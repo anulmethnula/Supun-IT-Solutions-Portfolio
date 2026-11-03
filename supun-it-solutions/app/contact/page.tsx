@@ -108,7 +108,7 @@ export default function Contact() {
           >
             <div className="mb-7">
               <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-blue-600">Send a message</p>
-              <h2 className="mt-2 text-2xl font-extrabold tracking-[-0.025em] text-[#071a45] sm:text-3xl">Tell us about your project.</h2>
+              <h2 className="mt-2 text-2xl font-extrabold tracking-[-0.025em] text-[#071a45] sm:text-3xl">Contact our team.</h2>
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
@@ -157,7 +157,7 @@ export default function Contact() {
               <textarea
                 name="message"
                 rows={6}
-                placeholder="Tell us about your project, idea or challenge..."
+                placeholder="Write your message..."
                 required
                 className="mt-2 w-full resize-y rounded-2xl border border-blue-100 bg-white/85 px-4 py-3.5 font-medium leading-6 text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
               />
