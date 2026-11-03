@@ -8,4 +8,4 @@ export function SectionTitle({label,title,desc,center=false}:{label?:string,titl
 export function PrimaryButton({href,children}:{href:string,children:React.ReactNode}){return <Link className="btn primary" href={href}>{children}<ArrowRight size={17}/></Link>}
 export function SecondaryButton({href,children}:{href:string,children:React.ReactNode}){return <Link className="btn secondary" href={href}>{children}</Link>}
 export function Visual({label="Preview visual",className=""}:{label?:string,className?:string}){return <div className={`visual ${className}`}><span className="visual-mark">S</span><small>{label}</small></div>}
-export function Marquee({items,reverse=false}:{items:string[],reverse?:boolean}){let all=[...items,...items];return <div className="marquee"><div className={reverse?"marquee-track reverse":"marquee-track"}>{all.map((x,i)=><span key={i}>{x}<b>✦</b></span>)}</div></div>}
+export function Marquee({items,reverse=false}:{items:string[],reverse?:boolean}){const all=[...items,...items];return <div className="marquee"><div className={reverse?"marquee-track reverse":"marquee-track"}>{all.map((x,i)=><span key={i}>{x}<b>✦</b></span>)}</div></div>}
