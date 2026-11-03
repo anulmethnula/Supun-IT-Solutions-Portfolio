@@ -1,0 +1,5 @@
+import { Braces,Server,Database,Smartphone,Cloud,Settings } from "lucide-react";
+import { techStack } from "@/src/data/techStack";
+import { Eyebrow, Reveal, Visual } from "@/src/components/ui";
+const icons=[Braces,Server,Database,Smartphone,Cloud,Settings];
+export default function TechStack(){return <><section className="tech-hero"><div><Eyebrow>TECH STACK</Eyebrow><h1>Our <em>Technology Stack</em></h1><p>Modern, reliable and industry-proven technologies we use to build scalable, secure and high-performance solutions.</p><blockquote>The Technology Behind Our Solutions</blockquote></div><Visual label="Coding and technology visual"/></section><section className="section tech-grid">{techStack.map((g,i)=>{const Icon=icons[i];return <Reveal className="tech-card" key={g.title}><header><div className="icon-box"><Icon/></div><div><h2>{g.title}</h2><p>{g.description}</p></div></header><div className="tech-items">{g.items.map(x=><span key={x}><b>{x.slice(0,2).toUpperCase()}</b>{x}</span>)}</div></Reveal>})}</section></>}
