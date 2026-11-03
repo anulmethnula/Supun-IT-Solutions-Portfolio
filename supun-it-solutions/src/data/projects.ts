@@ -9,6 +9,7 @@ export type Project = {
   secondaryCategories?: string[];
   tags: string[];
   image?: string;
+  imageCandidates?: string[];
   imageAlt: string;
   status: ProjectStatus;
   liveUrl?: string;
@@ -34,7 +35,12 @@ export const projects: Project[] = [
     category: "ERP Systems",
     secondaryCategories: ["Business Systems", "Internal Systems"],
     tags: ["ERP", "Finance", "Procurement", "Manufacturing"],
-    imageAlt: "Enterprise ERP workflow interface preview",
+    imageCandidates: [
+      "/images/projects/enterprise_erp_systems_dashboard.png",
+      "/images/projects/covers/enterprise_erp_systems_dashboard.png",
+      "/enterprise_erp_systems_dashboard.png",
+    ],
+    imageAlt: "Enterprise ERP Systems dashboard cover",
     status: "Internal System",
     technologies: ["React", "TypeScript", "Node.js", "MySQL"],
     features: ["Supplier and purchase management", "Approval controls", "GRN and batch stock", "General ledger integration", "Role-based access"],
@@ -55,7 +61,13 @@ export const projects: Project[] = [
     secondaryCategories: ["Web Applications", "E-Commerce"],
     tags: ["Entrepreneur Platform", "COD", "Stock", "Payouts"],
     image: "/images/projects/camy/camy-market.png",
-    imageAlt: "CAMY Market live digital platform",
+    imageCandidates: [
+      "/images/projects/camy_entrepreneurs_digital_platform.png",
+      "/images/projects/covers/camy_entrepreneurs_digital_platform.png",
+      "/camy_entrepreneurs_digital_platform.png",
+      "/images/projects/camy/camy-market.png",
+    ],
+    imageAlt: "CAMY Entrepreneurs Digital Platform cover",
     status: "Live",
     liveUrl: "https://camymarket.com/",
     liveLabel: "View Live",
@@ -65,16 +77,23 @@ export const projects: Project[] = [
     solution: "An end-to-end commerce and operations platform linking entrepreneur activity to inventory, fulfilment, payouts and administration.",
     impact: "Simplifies the full entrepreneur sales journey and gives administrators clearer control over daily operations.",
     businessArea: "Entrepreneur commerce and fulfilment",
+    featured: true,
     tone: "camy",
   },
   {
     id: "supun-group-redesign",
-    title: "Supun Group of Companies Website Redesign",
+    title: "Supun Group Website Redesign",
     description: "A full redesign of the Supun Group corporate website, creating a modern digital experience for the group's businesses, brands and company information.",
     category: "Web Applications",
     tags: ["Corporate Website", "Website Redesign", "React", "Admin System"],
     image: "/images/projects/supun-group/supun-group.png",
-    imageAlt: "Redesigned Supun Group of Companies website",
+    imageCandidates: [
+      "/images/projects/supun_group_website_redesign_cover.png",
+      "/images/projects/covers/supun_group_website_redesign_cover.png",
+      "/supun_group_website_redesign_cover.png",
+      "/images/projects/supun-group/supun-group.png",
+    ],
+    imageAlt: "Supun Group website redesign cover",
     status: "Live",
     liveUrl: "https://supuncompanies.com/",
     liveLabel: "Visit Website",
@@ -84,6 +103,7 @@ export const projects: Project[] = [
     solution: "A responsive component-based redesign with optimized media and an administration layer for maintaining company information.",
     impact: "Strengthens the group's digital identity and makes its diverse portfolio easier to explore across devices.",
     businessArea: "Corporate communications",
+    featured: true,
     tone: "corporate",
   },
   {
@@ -93,8 +113,12 @@ export const projects: Project[] = [
     category: "Business Systems",
     secondaryCategories: ["Mobile Applications", "Internal Systems"],
     tags: ["QR Feedback", "Hospitality", "Firebase", "Web & Mobile"],
-    image: "/images/projects/feedback/hospitality.png",
-    imageAlt: "Hospitality setting used by the guest feedback platform",
+    imageCandidates: [
+      "/images/projects/guest_feedback_management_system.png",
+      "/images/projects/covers/guest_feedback_management_system.png",
+      "/guest_feedback_management_system.png",
+    ],
+    imageAlt: "Guest Feedback Management System cover",
     status: "Internal System",
     technologies: ["React", "Firebase", "Capacitor"],
     features: ["QR access by location or zone", "Structured multi-step forms", "Secure management area", "Firebase Authentication", "Email notifications", "Android and iOS support"],
@@ -111,7 +135,12 @@ export const projects: Project[] = [
     category: "ERP Systems",
     secondaryCategories: ["Internal Systems"],
     tags: ["ERP", "Manufacturing", "Finance", "Inventory"],
-    imageAlt: "AeroSoft360 controlled ERP workflow preview",
+    imageCandidates: [
+      "/images/projects/aerosoft360_erp_dashboard_hero.png",
+      "/images/projects/covers/aerosoft360_erp_dashboard_hero.png",
+      "/aerosoft360_erp_dashboard_hero.png",
+    ],
+    imageAlt: "AeroSoft360 ERP dashboard cover",
     status: "Internal System",
     technologies: ["React", "Node.js", "MySQL", "REST API"],
     features: ["Purchase management", "Approval workflow", "GRN", "Raw material batches", "Inventory and finance", "Role-based access"],
