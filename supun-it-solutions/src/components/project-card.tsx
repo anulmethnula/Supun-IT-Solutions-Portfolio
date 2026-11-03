@@ -1,23 +1,50 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, BarChart3, Boxes, CheckCircle2, Database, PackageCheck, WalletCards } from "lucide-react";
+import { ArrowUpRight, Database, Layers3 } from "lucide-react";
 import type { Project } from "@/src/data/projects";
 
-function ErpPreview({ project }: { project: Project }) {
-  return (
-    <div className="erp-preview" role="img" aria-label={project.imageAlt}>
-      <div className="erp-window">
-        <div className="erp-sidebar"><span /><span /><span /><span /></div>
-        <div className="erp-screen">
-          <div className="erp-top"><i /><i /></div>
-          <div className="erp-metrics"><span><WalletCards />Finance</span><span><Boxes />Inventory</span><span><PackageCheck />Orders</span></div>
-          <div className="erp-chart"><BarChart3 /><span /><span /><span /><span /><span /></div>
+const fallbackTone: Record<Project["tone"], string> = {
+  erp: "from-blue-950 via-blue-700 to-cyan-400",
+  camy: "from-slate-950 via-blue-800 to-sky-400",
+  corporate: "from-slate-900 via-blue-700 to-cyan-300",
+  feedback: "from-blue-900 via-cyan-600 to-sky-200",
+  aerosoft: "from-slate-950 via-blue-700 to-indigo-300",
+};
+
+export function ProjectCover({ project, priority = false, className = "" }: { project: Project; priority?: boolean; className?: string }) {
+  const candidates = useMemo(() => {
+    const list = [...(project.imageCandidates ?? []), ...(project.image ? [project.image] : [])];
+    return [...new Set(list)];
+  }, [project.image, project.imageCandidates]);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => setIndex(0), [project.id]);
+
+  if (!candidates[index]) {
+    return (
+      <div className={`absolute inset-0 grid place-items-center bg-gradient-to-br ${fallbackTone[project.tone]} ${className}`} role="img" aria-label={project.imageAlt}>
+        <div className="flex flex-col items-center gap-3 text-center text-white">
+          <span className="grid h-14 w-14 place-items-center rounded-2xl border border-white/30 bg-white/15 backdrop-blur-xl"><Layers3 size={28} /></span>
+          <strong className="max-w-[75%] text-lg font-extrabold">{project.title}</strong>
         </div>
       </div>
-      <div className="laptop-base" />
-    </div>
+    );
+  }
+
+  return (
+    <Image
+      key={candidates[index]}
+      src={candidates[index]}
+      alt={project.imageAlt}
+      fill
+      priority={priority}
+      sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw"
+      className={`object-cover transition duration-700 group-hover:scale-[1.025] ${className}`}
+      onError={() => setIndex((value) => value + 1)}
+    />
   );
 }
 
@@ -25,30 +52,45 @@ export function ProjectCard({ project, onOpen, index = 0 }: { project: Project; 
   return (
     <motion.article
       layout
-      className={`portfolio-card tone-${project.tone}${project.featured ? " featured" : ""}`}
-      initial={{ opacity: 0, y: 30, scale: 0.98 }}
+      initial={{ opacity: 0, y: 28, scale: 0.985 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 16, scale: 0.97 }}
-      transition={{ duration: 0.45, delay: index * 0.06 }}
+      exit={{ opacity: 0, y: 14, scale: 0.98 }}
+      transition={{ duration: 0.45, delay: index * 0.05 }}
       whileHover={{ y: -6 }}
+      className="group flex h-full min-h-[520px] flex-col overflow-hidden rounded-[28px] border border-blue-100/80 bg-white/85 shadow-[0_18px_60px_rgba(37,99,235,0.10)] backdrop-blur-xl transition-shadow hover:shadow-[0_26px_70px_rgba(37,99,235,0.18)]"
     >
-      <div className="portfolio-media">
-        {project.image ? <Image src={project.image} alt={project.imageAlt} fill sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 34vw" /> : <ErpPreview project={project} />}
-        <span className="media-glow" />
-        <span className={`status status-${project.status.toLowerCase().replaceAll(" ", "-")}`}>{project.status === "Live" && <i />} {project.status}</span>
-        {project.companies && <div className="company-pills">{project.companies.map((company) => <span key={company}>{company}</span>)}</div>}
+      <div className="relative aspect-[16/9] overflow-hidden bg-blue-50">
+        <ProjectCover project={project} priority={index < 2} />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/16 via-transparent to-white/5" />
+        <span className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/88 px-3 py-2 text-xs font-extrabold text-slate-800 shadow-lg backdrop-blur-xl">
+          {project.status === "Live" && <i className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,.12)]" />}
+          {project.status}
+        </span>
       </div>
-      <div className="portfolio-copy">
-        <div className="project-meta"><span className="category-chip">{project.category}</span><span><Database />{project.technologies[0]}</span></div>
-        <h2>{project.title}</h2>
-        {project.subtitle && <p className="project-subtitle">{project.subtitle}</p>}
-        <p>{project.description}</p>
-        <div className="project-tags">{project.tags.slice(0, 4).map((tag) => <span key={tag}>{tag}</span>)}</div>
-        <button className="project-open" onClick={() => onOpen?.(project)} aria-label={`View details for ${project.title}`}>
-          <span>Explore project</span><ArrowUpRight />
+
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <span className="rounded-full bg-blue-50 px-3 py-2 text-[11px] font-black uppercase tracking-[0.14em] text-blue-700">{project.category}</span>
+          <span className="flex items-center gap-1.5 text-xs font-bold text-slate-500"><Database size={14} />{project.technologies[0]}</span>
+        </div>
+
+        <h2 className="text-[1.55rem] font-extrabold leading-tight tracking-[-0.035em] text-slate-950">{project.title}</h2>
+        {project.subtitle && <p className="mt-2 text-sm font-bold leading-6 text-blue-700">{project.subtitle}</p>}
+        <p className="mt-3 text-sm leading-6 text-slate-600">{project.description}</p>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          {project.tags.slice(0, 4).map((tag) => <span key={tag} className="rounded-full border border-blue-100 bg-blue-50/70 px-3 py-1.5 text-xs font-bold text-slate-700">{tag}</span>)}
+        </div>
+
+        <button
+          className="mt-auto flex items-center justify-between border-t border-blue-100 pt-5 text-sm font-extrabold text-slate-900 transition hover:text-blue-600"
+          onClick={() => onOpen?.(project)}
+          aria-label={`View details for ${project.title}`}
+        >
+          <span>Explore project</span>
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-blue-50 text-blue-600 transition group-hover:bg-blue-600 group-hover:text-white"><ArrowUpRight size={18} /></span>
         </button>
       </div>
-      <CheckCircle2 className="card-watermark" aria-hidden="true" />
     </motion.article>
   );
 }
