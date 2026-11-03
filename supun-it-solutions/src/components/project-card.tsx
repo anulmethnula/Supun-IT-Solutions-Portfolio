@@ -44,7 +44,7 @@ export function ProjectCover({ project, priority = false, className = "" }: { pr
       fill
       priority={priority}
       sizes="(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 33vw"
-      className={`object-cover transition duration-700 ease-out group-hover:scale-[1.035] ${className}`}
+      className={`object-cover transition duration-700 ease-out group-hover:scale-[1.008] ${className}`}
       onError={() => setIndex((value) => value + 1)}
     />
   );
@@ -64,7 +64,7 @@ export function ProjectCard({ project, onOpen, index = 0 }: { project: Project; 
       <div className="pointer-events-none absolute -right-16 -top-16 z-10 h-40 w-40 rounded-full bg-cyan-300/20 blur-3xl transition duration-700 group-hover:scale-125 group-hover:bg-blue-400/25" />
       <div className="pointer-events-none absolute inset-x-10 top-0 z-20 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50 transition-opacity duration-500 group-hover:opacity-100" />
 
-      <div className="relative m-3 aspect-[16/10] overflow-hidden rounded-[24px] bg-blue-50 sm:m-4">
+      <div className="relative m-3 aspect-video overflow-hidden rounded-[24px] bg-blue-50 sm:m-4">
         <ProjectCover project={project} priority={index < 3} />
         <div className="absolute inset-0 bg-gradient-to-t from-[#061633]/65 via-transparent to-transparent opacity-70 transition duration-500 group-hover:opacity-55" />
 
