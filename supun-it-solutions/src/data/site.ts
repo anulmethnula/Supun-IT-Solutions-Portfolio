@@ -3,7 +3,11 @@ export const siteConfig = {
   parentCompany: "Supun Group of Companies",
   description: "Digital products and business systems for the Supun Group.",
   logo: "/images/brand/supun-it-solutions-logo.png",
-  linkedin: "", github: "", email: "", phone: "", supunGroupUrl: "https://supuncompanies.com/",
+  linkedin: "",
+  github: "",
+  email: "info@supungroup.lk",
+  phone: "",
+  supunGroupUrl: "https://supuncompanies.com/",
 };
 
 export const navItems = [
