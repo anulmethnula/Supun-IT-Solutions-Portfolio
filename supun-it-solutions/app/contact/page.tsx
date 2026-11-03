@@ -3,12 +3,10 @@
 import type { FormEvent } from "react";
 import {
   ArrowUpRight,
-  Building2,
   Globe2,
   Mail,
   MessageSquareText,
   Send,
-  Sparkles,
 } from "lucide-react";
 import { siteConfig } from "@/src/data/site";
 
@@ -54,16 +52,9 @@ export default function Contact() {
 
       <section className="relative mx-auto max-w-[1420px]">
         <div className="mb-10 text-center lg:mb-12">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50/80 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.22em] text-blue-600 shadow-sm backdrop-blur-xl">
-            <Sparkles size={15} />
-            Contact Us
-          </div>
           <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-[-0.045em] text-[#071a45] sm:text-5xl lg:text-6xl">
             Have an idea? <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">Let&apos;s build it together.</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-500 sm:text-lg">
-            Tell us what you need. We&apos;ll help turn your business idea, workflow or digital challenge into a practical solution.
-          </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
@@ -82,9 +73,6 @@ export default function Contact() {
               <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#071a45] sm:text-4xl">
                 Start a conversation.
               </h2>
-              <p className="mt-4 max-w-md leading-7 text-slate-500">
-                For project enquiries, system improvements or digital solutions, contact our team directly.
-              </p>
 
               <div className="mt-9 space-y-3">
                 <a
@@ -116,11 +104,6 @@ export default function Contact() {
                   </span>
                   <ArrowUpRight className="text-blue-500 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" size={19} />
                 </a>
-              </div>
-
-              <div className="mt-9 flex items-center gap-3 rounded-2xl border border-blue-100/70 bg-blue-50/60 px-4 py-3 text-sm text-slate-600">
-                <Building2 className="shrink-0 text-blue-600" size={19} />
-                <span>Digital solutions for the Supun Group of Companies.</span>
               </div>
             </div>
           </aside>
@@ -186,16 +169,13 @@ export default function Contact() {
               />
             </label>
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-6">
               <button
                 className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#1267F4] to-[#00A7FF] px-6 py-3.5 font-extrabold text-white shadow-[0_12px_28px_rgba(18,103,244,0.25)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(18,103,244,0.32)]"
                 type="submit"
               >
                 Send Message <Send size={18} />
               </button>
-              <span className="text-xs leading-5 text-slate-400 sm:max-w-[270px] sm:text-right">
-                Your email app will open with the message addressed to {siteConfig.email}.
-              </span>
             </div>
           </form>
         </div>
