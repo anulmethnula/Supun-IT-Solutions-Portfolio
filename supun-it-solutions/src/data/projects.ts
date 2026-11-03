@@ -36,6 +36,9 @@ export const projects: Project[] = [
     secondaryCategories: ["Business Systems", "Internal Systems"],
     tags: ["ERP", "Finance", "Procurement", "Manufacturing"],
     imageCandidates: [
+      "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_03 PM - 1.png",
+      "/images/ChatGPT Image Nov 3, 2026, 02_28_03 PM - 1.png",
+      "/ChatGPT Image Nov 3, 2026, 02_28_03 PM - 1.png",
       "/images/projects/enterprise_erp_systems_dashboard.png",
       "/images/projects/covers/enterprise_erp_systems_dashboard.png",
       "/enterprise_erp_systems_dashboard.png",
@@ -62,6 +65,12 @@ export const projects: Project[] = [
     tags: ["Entrepreneur Platform", "COD", "Stock", "Payouts"],
     image: "/images/projects/camy/camy-market.png",
     imageCandidates: [
+      "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_05 PM - 2.png",
+      "/images/ChatGPT Image Nov 3, 2026, 02_28_05 PM - 2.png",
+      "/ChatGPT Image Nov 3, 2026, 02_28_05 PM - 2.png",
+      "/images/projects/ChatGPT Image Nov 3, 2026, 02_27_38 PM.png",
+      "/images/ChatGPT Image Nov 3, 2026, 02_27_38 PM.png",
+      "/ChatGPT Image Nov 3, 2026, 02_27_38 PM.png",
       "/images/projects/camy_entrepreneurs_digital_platform.png",
       "/images/projects/covers/camy_entrepreneurs_digital_platform.png",
       "/camy_entrepreneurs_digital_platform.png",
@@ -88,6 +97,9 @@ export const projects: Project[] = [
     tags: ["Corporate Website", "Website Redesign", "React", "Admin System"],
     image: "/images/projects/supun-group/supun-group.png",
     imageCandidates: [
+      "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_06 PM - 3.png",
+      "/images/ChatGPT Image Nov 3, 2026, 02_28_06 PM - 3.png",
+      "/ChatGPT Image Nov 3, 2026, 02_28_06 PM - 3.png",
       "/images/projects/supun_group_website_redesign_cover.png",
       "/images/projects/covers/supun_group_website_redesign_cover.png",
       "/supun_group_website_redesign_cover.png",
@@ -114,6 +126,9 @@ export const projects: Project[] = [
     secondaryCategories: ["Mobile Applications", "Internal Systems"],
     tags: ["QR Feedback", "Hospitality", "Firebase", "Web & Mobile"],
     imageCandidates: [
+      "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_08 PM - 4.png",
+      "/images/ChatGPT Image Nov 3, 2026, 02_28_08 PM - 4.png",
+      "/ChatGPT Image Nov 3, 2026, 02_28_08 PM - 4.png",
       "/images/projects/guest_feedback_management_system.png",
       "/images/projects/covers/guest_feedback_management_system.png",
       "/guest_feedback_management_system.png",
@@ -136,6 +151,9 @@ export const projects: Project[] = [
     secondaryCategories: ["Internal Systems"],
     tags: ["ERP", "Manufacturing", "Finance", "Inventory"],
     imageCandidates: [
+      "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_10 PM - 5.png",
+      "/images/ChatGPT Image Nov 3, 2026, 02_28_10 PM - 5.png",
+      "/ChatGPT Image Nov 3, 2026, 02_28_10 PM - 5.png",
       "/images/projects/aerosoft360_erp_dashboard_hero.png",
       "/images/projects/covers/aerosoft360_erp_dashboard_hero.png",
       "/aerosoft360_erp_dashboard_hero.png",
