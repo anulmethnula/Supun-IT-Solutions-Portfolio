@@ -2,7 +2,19 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, ExternalLink, Layers3, Rocket, X } from "lucide-react";
+import {
+  ArrowUpRight,
+  Building2,
+  Check,
+  Cpu,
+  ExternalLink,
+  Layers3,
+  Rocket,
+  Sparkles,
+  Target,
+  Workflow,
+  X,
+} from "lucide-react";
 import { projects, type Project } from "@/src/data/projects";
 import { ProjectCard, ProjectCover } from "@/src/components/project-card";
 
@@ -20,38 +32,144 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
   }, [onClose]);
 
   return (
-    <motion.div className="fixed inset-0 z-[100] grid place-items-center bg-slate-950/55 p-4 backdrop-blur-md" role="presentation" onMouseDown={onClose} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-      <motion.div className="max-h-[92vh] w-full max-w-5xl overflow-y-auto rounded-[28px] border border-white/70 bg-white shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onMouseDown={(event) => event.stopPropagation()} initial={{ opacity: 0, y: 24, scale: 0.985 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.985 }}>
-        <div className="relative aspect-[16/7] overflow-hidden bg-blue-50">
+    <motion.div
+      className="fixed inset-0 z-[100] grid place-items-center bg-[#071225]/70 p-3 backdrop-blur-xl sm:p-5"
+      role="presentation"
+      onMouseDown={onClose}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="relative max-h-[94vh] w-full max-w-6xl overflow-y-auto rounded-[34px] border border-white/70 bg-white/95 shadow-[0_40px_120px_rgba(3,22,60,0.35)] backdrop-blur-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-modal-title"
+        onMouseDown={(event) => event.stopPropagation()}
+        initial={{ opacity: 0, y: 28, scale: 0.975 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 18, scale: 0.98 }}
+        transition={{ duration: 0.32 }}
+      >
+        <div className="group relative aspect-[16/7.2] min-h-[290px] overflow-hidden bg-blue-50 sm:min-h-[360px]">
           <ProjectCover project={project} priority />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent" />
-          <button className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border border-white/70 bg-white/90 text-slate-900 shadow-lg backdrop-blur-xl" onClick={onClose} aria-label="Close project details"><X /></button>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#061633]/90 via-[#061633]/25 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 lg:p-10">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-full border border-white/25 bg-white/14 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-white backdrop-blur-xl">
+                {project.category}
+              </span>
+              <span className="rounded-full border border-white/25 bg-white/14 px-3 py-1.5 text-[10px] font-bold text-white/90 backdrop-blur-xl">
+                {project.status}
+              </span>
+            </div>
+            <h2 id="project-modal-title" className="mt-4 max-w-4xl text-3xl font-extrabold leading-tight tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl">
+              {project.title}
+            </h2>
+            {project.subtitle && <p className="mt-3 max-w-3xl text-sm font-semibold leading-6 text-blue-100 sm:text-base">{project.subtitle}</p>}
+          </div>
+
+          <button
+            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border border-white/60 bg-white/88 text-[#071a45] shadow-xl backdrop-blur-xl transition hover:rotate-90 hover:bg-white"
+            onClick={onClose}
+            aria-label="Close project details"
+          >
+            <X size={20} />
+          </button>
         </div>
 
-        <div className="p-6 sm:p-9">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-3xl">
-              <span className="rounded-full bg-blue-50 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-blue-700">{project.category}</span>
-              <h2 id="project-modal-title" className="mt-4 text-3xl font-extrabold tracking-[-0.04em] text-slate-950 sm:text-4xl">{project.title}</h2>
-              <p className="mt-3 leading-7 text-slate-600">{project.description}</p>
+        <div className="grid gap-10 p-6 sm:p-8 lg:grid-cols-[1.35fr_0.65fr] lg:p-10">
+          <div>
+            <div className="border-b border-slate-100 pb-7">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-blue-600">Project Overview</p>
+              <p className="mt-3 max-w-3xl text-[1.02rem] leading-8 text-slate-600">{project.description}</p>
             </div>
-            <span className="w-fit rounded-full border border-blue-100 bg-white px-4 py-2 text-sm font-extrabold text-slate-800 shadow-sm">{project.status}</span>
+
+            <div className="divide-y divide-slate-100">
+              <section className="grid gap-4 py-7 sm:grid-cols-[150px_1fr]">
+                <div className="flex items-center gap-2 font-extrabold text-[#071a45]"><Target size={18} className="text-blue-600" /> Challenge</div>
+                <p className="leading-7 text-slate-600">{project.businessProblem}</p>
+              </section>
+              <section className="grid gap-4 py-7 sm:grid-cols-[150px_1fr]">
+                <div className="flex items-center gap-2 font-extrabold text-[#071a45]"><Sparkles size={18} className="text-cyan-500" /> Solution</div>
+                <p className="leading-7 text-slate-600">{project.solution}</p>
+              </section>
+              <section className="grid gap-4 py-7 sm:grid-cols-[150px_1fr]">
+                <div className="flex items-center gap-2 font-extrabold text-[#071a45]"><ArrowUpRight size={18} className="text-blue-600" /> Impact</div>
+                <p className="leading-7 text-slate-600">{project.impact}</p>
+              </section>
+            </div>
+
+            {project.workflow && (
+              <section className="relative overflow-hidden rounded-[26px] border border-blue-100 bg-gradient-to-br from-[#071a45] via-[#0e377d] to-[#0d8fd4] p-6 text-white shadow-[0_20px_55px_rgba(18,103,244,0.18)] sm:p-7">
+                <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full border border-white/15" />
+                <div className="relative flex items-start gap-4">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white/12 text-cyan-200 backdrop-blur-xl"><Workflow size={21} /></span>
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.17em] text-cyan-200">Core Workflow</p>
+                    <p className="mt-3 text-sm font-semibold leading-7 text-white/90">{project.workflow}</p>
+                  </div>
+                </div>
+              </section>
+            )}
           </div>
 
-          {project.companies && <div className="mt-6 flex flex-wrap gap-2">{project.companies.map((company) => <span className="rounded-full border border-blue-100 bg-blue-50 px-3 py-2 text-sm font-bold text-blue-800" key={company}>{company}</span>)}</div>}
+          <aside className="lg:sticky lg:top-6 lg:self-start">
+            <div className="overflow-hidden rounded-[28px] border border-blue-100/80 bg-gradient-to-br from-white via-blue-50/45 to-cyan-50/45 p-6 shadow-[0_18px_60px_rgba(18,103,244,0.10)] sm:p-7">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-blue-600">Project Details</p>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {[["Business problem", project.businessProblem], ["Solution", project.solution], ["Impact", project.impact], ["Business area", project.businessArea]].map(([title, text]) => <section key={title} className="rounded-2xl border border-blue-100 bg-blue-50/45 p-5"><h3 className="font-extrabold text-slate-950">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{text}</p></section>)}
-          </div>
+              <div className="mt-6 space-y-6">
+                <div>
+                  <div className="flex items-center gap-2 text-sm font-extrabold text-[#071a45]"><Building2 size={17} className="text-blue-600" /> Business Area</div>
+                  <p className="mt-2 text-sm leading-6 text-slate-500">{project.businessArea}</p>
+                </div>
 
-          {project.workflow && <div className="mt-5 rounded-2xl bg-slate-950 p-5 text-white"><b>Core workflow</b><p className="mt-2 text-sm leading-6 text-blue-100">{project.workflow}</p></div>}
+                {project.companies && (
+                  <div>
+                    <p className="text-sm font-extrabold text-[#071a45]">Companies</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {project.companies.map((company) => (
+                        <span key={company} className="rounded-full border border-blue-100 bg-white px-3 py-1.5 text-[11px] font-bold text-blue-700 shadow-sm">{company}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-          <div className="mt-8 grid gap-7 md:grid-cols-2">
-            <section><h3 className="font-extrabold text-slate-950">Key features</h3><div className="mt-3 space-y-2">{project.features.map((feature) => <span className="flex items-start gap-2 text-sm text-slate-600" key={feature}><Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" />{feature}</span>)}</div></section>
-            <section><h3 className="font-extrabold text-slate-950">Technology</h3><div className="mt-3 flex flex-wrap gap-2">{project.technologies.map((technology) => <b className="rounded-full border border-blue-100 bg-white px-3 py-2 text-xs text-slate-700 shadow-sm" key={technology}>{technology}</b>)}</div></section>
-          </div>
+                <div>
+                  <div className="flex items-center gap-2 text-sm font-extrabold text-[#071a45]"><Cpu size={17} className="text-blue-600" /> Technology</div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {project.technologies.map((technology) => (
+                      <span key={technology} className="rounded-full border border-slate-200 bg-white/90 px-3 py-1.5 text-[11px] font-bold text-slate-600">{technology}</span>
+                    ))}
+                  </div>
+                </div>
 
-          {project.liveUrl && <a className="mt-8 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-700 to-cyan-500 px-5 py-3 font-extrabold text-white shadow-lg shadow-blue-500/20" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{project.liveLabel ?? "Visit Live System"}<ExternalLink size={17} /></a>}
+                <div>
+                  <p className="text-sm font-extrabold text-[#071a45]">Key Features</p>
+                  <div className="mt-3 space-y-2.5">
+                    {project.features.map((feature) => (
+                      <div className="flex items-start gap-2.5 text-sm leading-6 text-slate-600" key={feature}>
+                        <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blue-600 text-white"><Check size={12} /></span>
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {project.liveUrl && (
+                <a
+                  className="mt-7 flex items-center justify-between rounded-2xl bg-gradient-to-r from-[#1267F4] to-[#00A7FF] px-5 py-4 font-extrabold text-white shadow-[0_14px_30px_rgba(18,103,244,0.25)] transition hover:-translate-y-0.5"
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>{project.liveLabel ?? "Visit Live System"}</span>
+                  <ExternalLink size={17} />
+                </a>
+              )}
+            </div>
+          </aside>
         </div>
       </motion.div>
     </motion.div>
@@ -68,25 +186,33 @@ export default function Projects() {
 
   return (
     <main className="relative overflow-hidden bg-white pb-20">
-      <div aria-hidden="true" className="pointer-events-none absolute -left-24 top-28 h-72 w-72 rounded-full bg-blue-300/10 blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute -right-24 top-72 h-80 w-80 rounded-full bg-cyan-300/12 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -left-24 top-36 h-80 w-80 rounded-full bg-blue-300/12 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-24 top-80 h-96 w-96 rounded-full bg-cyan-300/14 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_70%_10%,rgba(15,165,255,.08),transparent_34%),radial-gradient(circle_at_25%_20%,rgba(18,103,244,.08),transparent_30%)]" />
 
-      <section className="relative mx-auto max-w-[1420px] px-5 pb-8 pt-20 sm:px-8 lg:px-10 lg:pb-10 lg:pt-24">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} className="max-w-4xl">
-          <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em] text-blue-600"><span>Our Projects</span><i className="h-px w-10 bg-gradient-to-r from-blue-600 to-cyan-400" /></div>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-[-0.045em] text-slate-950 sm:text-5xl lg:text-6xl">Project <span className="bg-gradient-to-r from-blue-700 to-cyan-500 bg-clip-text text-transparent">Portfolio</span></h1>
-          <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">ERP systems, web applications, business platforms and digital products built for real operations across the Supun Group.</p>
+      <section className="relative mx-auto max-w-[1420px] px-5 pb-9 pt-20 sm:px-8 lg:px-10 lg:pb-11 lg:pt-24">
+        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} className="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em] text-blue-600"><span>Our Projects</span><i className="h-px w-10 bg-gradient-to-r from-blue-600 to-cyan-400" /></div>
+            <h1 className="mt-4 text-4xl font-extrabold tracking-[-0.05em] text-[#071a45] sm:text-5xl lg:text-6xl">Project <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">Portfolio</span></h1>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-500 sm:text-lg">ERP systems, web applications and digital business platforms built around real operational needs.</p>
+          </div>
+
+          <div className="hidden items-center gap-3 rounded-2xl border border-blue-100 bg-white/70 px-4 py-3 text-sm font-bold text-slate-500 shadow-sm backdrop-blur-xl lg:flex">
+            <Layers3 size={18} className="text-blue-600" />
+            <span>{projects.length} selected projects</span>
+          </div>
         </motion.div>
       </section>
 
       <section className="relative mx-auto max-w-[1420px] px-5 sm:px-8 lg:px-10">
-        <div className="flex flex-col gap-4 rounded-[22px] border border-blue-100 bg-white/80 p-3 shadow-[0_12px_40px_rgba(37,99,235,0.07)] backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 rounded-[24px] border border-white/90 bg-white/72 p-3 shadow-[0_18px_60px_rgba(18,103,244,0.09)] backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
           <div className="flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
             {filters.map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActive(filter)}
-                className={`whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-extrabold transition ${active === filter ? "bg-gradient-to-r from-blue-700 to-cyan-500 text-white shadow-lg shadow-blue-500/15" : "border border-blue-100 bg-white text-slate-600 hover:border-blue-300 hover:text-blue-700"}`}
+                className={`whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-extrabold transition-all duration-300 ${active === filter ? "bg-gradient-to-r from-[#1267F4] to-[#00A7FF] text-white shadow-[0_10px_24px_rgba(18,103,244,0.22)]" : "border border-slate-200/80 bg-white/80 text-slate-500 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"}`}
               >
                 {filter}
               </button>
@@ -96,20 +222,26 @@ export default function Projects() {
         </div>
       </section>
 
-      <section className="relative mx-auto mt-7 grid max-w-[1420px] gap-5 px-5 sm:px-8 md:grid-cols-2 lg:px-10 xl:grid-cols-3">
-        <AnimatePresence mode="popLayout">{visible.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onOpen={setSelected} />)}</AnimatePresence>
+      <section className="relative mx-auto mt-8 grid max-w-[1420px] gap-6 px-5 sm:px-8 md:grid-cols-2 lg:px-10 xl:grid-cols-3">
+        <AnimatePresence mode="popLayout">
+          {visible.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onOpen={setSelected} />)}
+        </AnimatePresence>
       </section>
 
-      <motion.section className="relative mx-auto mt-12 max-w-[1420px] px-5 sm:px-8 lg:px-10" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-        <div className="flex flex-col gap-5 overflow-hidden rounded-[24px] bg-gradient-to-r from-slate-950 via-blue-950 to-blue-800 p-6 text-white shadow-xl sm:p-7 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex items-center gap-4">
-            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-cyan-300"><Rocket size={22} /></span>
-            <div><h2 className="text-xl font-extrabold">Coming Soon</h2><p className="mt-1 text-sm text-blue-100">More digital products are in development.</p></div>
-          </div>
-          <div className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/8 px-4 py-3 backdrop-blur-xl">
-            <Layers3 className="text-cyan-300" size={19} />
-            <div><b className="text-sm">MobiiG</b><p className="text-xs text-blue-100">Cycle &amp; Motor Stop</p></div>
-            <span className="ml-auto rounded-full bg-cyan-300 px-3 py-1.5 text-[10px] font-black text-blue-950">IN DEVELOPMENT</span>
+      <motion.section className="relative mx-auto mt-14 max-w-[1420px] px-5 sm:px-8 lg:px-10" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <div className="relative overflow-hidden rounded-[28px] border border-blue-100 bg-gradient-to-r from-[#071a45] via-[#0d377c] to-[#0a7cc2] p-6 text-white shadow-[0_26px_70px_rgba(18,103,244,0.18)] sm:p-8">
+          <div className="absolute -right-12 -top-20 h-64 w-64 rounded-full border border-white/10" />
+          <div className="absolute -bottom-24 left-1/3 h-56 w-56 rounded-full bg-cyan-300/15 blur-3xl" />
+          <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center gap-4">
+              <span className="grid h-13 w-13 place-items-center rounded-2xl border border-white/15 bg-white/10 text-cyan-200 backdrop-blur-xl"><Rocket size={22} /></span>
+              <div><p className="text-xs font-black uppercase tracking-[0.17em] text-cyan-200">Coming Soon</p><h2 className="mt-1 text-xl font-extrabold">More digital products are in development.</h2></div>
+            </div>
+            <div className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-xl">
+              <Layers3 className="text-cyan-200" size={19} />
+              <div><b className="text-sm">MobiiG</b><p className="text-xs text-blue-100">Cycle &amp; Motor Stop</p></div>
+              <span className="ml-auto rounded-full bg-cyan-200 px-3 py-1.5 text-[10px] font-black text-blue-950">IN DEVELOPMENT</span>
+            </div>
           </div>
         </div>
       </motion.section>
