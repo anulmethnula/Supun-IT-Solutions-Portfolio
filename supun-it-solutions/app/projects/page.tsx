@@ -7,9 +7,7 @@ import {
   Building2,
   Check,
   Cpu,
-  ExternalLink,
   Layers3,
-  Rocket,
   Sparkles,
   Target,
   Workflow,
@@ -58,9 +56,6 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full border border-white/25 bg-white/14 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-white backdrop-blur-xl">
                 {project.category}
-              </span>
-              <span className="rounded-full border border-white/25 bg-white/14 px-3 py-1.5 text-[10px] font-bold text-white/90 backdrop-blur-xl">
-                {project.status}
               </span>
             </div>
             <h2 id="project-modal-title" className="mt-4 max-w-4xl text-3xl font-extrabold leading-tight tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl">
@@ -157,17 +152,6 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                 </div>
               </div>
 
-              {project.liveUrl && (
-                <a
-                  className="mt-7 flex items-center justify-between rounded-2xl bg-gradient-to-r from-[#1267F4] to-[#00A7FF] px-5 py-4 font-extrabold text-white shadow-[0_14px_30px_rgba(18,103,244,0.25)] transition hover:-translate-y-0.5"
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>{project.liveLabel ?? "Visit Live System"}</span>
-                  <ExternalLink size={17} />
-                </a>
-              )}
             </div>
           </aside>
         </div>
@@ -190,24 +174,26 @@ export default function Projects() {
       <div aria-hidden="true" className="pointer-events-none absolute -right-24 top-80 h-96 w-96 rounded-full bg-cyan-300/14 blur-3xl" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_70%_10%,rgba(15,165,255,.08),transparent_34%),radial-gradient(circle_at_25%_20%,rgba(18,103,244,.08),transparent_30%)]" />
 
-      <section className="relative mx-auto max-w-[1420px] px-5 pb-9 pt-20 sm:px-8 lg:px-10 lg:pb-11 lg:pt-24">
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }} className="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
+      <section className="relative mx-auto max-w-[1320px] px-5 pb-10 pt-16 sm:px-8 lg:px-10 lg:pb-12 lg:pt-20">
+        <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} className="relative grid gap-8 overflow-hidden rounded-[34px] border border-white/80 bg-white/58 p-7 shadow-[0_28px_90px_rgba(18,103,244,0.11)] backdrop-blur-2xl sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end lg:p-12">
+          <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-28 h-72 w-72 rounded-full border-[42px] border-blue-400/10" />
+          <div aria-hidden="true" className="pointer-events-none absolute bottom-0 right-1/4 h-40 w-80 rounded-full bg-cyan-300/15 blur-3xl" />
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em] text-blue-600"><span>Our Projects</span><i className="h-px w-10 bg-gradient-to-r from-blue-600 to-cyan-400" /></div>
             <h1 className="mt-4 text-4xl font-extrabold tracking-[-0.05em] text-[#071a45] sm:text-5xl lg:text-6xl">Project <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">Portfolio</span></h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-slate-500 sm:text-lg">ERP systems, web applications and digital business platforms built around real operational needs.</p>
           </div>
 
-          <div className="hidden items-center gap-3 rounded-2xl border border-blue-100 bg-white/70 px-4 py-3 text-sm font-bold text-slate-500 shadow-sm backdrop-blur-xl lg:flex">
+          <div className="relative hidden items-center gap-3 rounded-2xl border border-white/90 bg-white/68 px-5 py-4 text-sm font-bold text-slate-500 shadow-[0_12px_35px_rgba(18,103,244,0.09)] backdrop-blur-xl lg:flex">
             <Layers3 size={18} className="text-blue-600" />
             <span>{projects.length} selected projects</span>
           </div>
         </motion.div>
       </section>
 
-      <section className="relative mx-auto max-w-[1420px] px-5 sm:px-8 lg:px-10">
-        <div className="flex flex-col gap-4 rounded-[24px] border border-white/90 bg-white/72 p-3 shadow-[0_18px_60px_rgba(18,103,244,0.09)] backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
+      <section className="relative mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
+        <div className="flex w-full min-w-0 max-w-full flex-col gap-4 overflow-hidden rounded-[24px] border border-white/90 bg-white/72 p-3 shadow-[0_18px_60px_rgba(18,103,244,0.09)] backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex w-full min-w-0 gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
             {filters.map((filter) => (
               <button
                 key={filter}
@@ -222,29 +208,11 @@ export default function Projects() {
         </div>
       </section>
 
-      <section className="relative mx-auto mt-8 grid max-w-[1420px] gap-6 px-5 sm:px-8 md:grid-cols-2 lg:px-10 xl:grid-cols-3">
+      <section className="relative mx-auto mt-9 grid max-w-[1320px] gap-7 px-5 sm:px-8 md:grid-cols-2 lg:gap-8 lg:px-10">
         <AnimatePresence mode="popLayout">
           {visible.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onOpen={setSelected} />)}
         </AnimatePresence>
       </section>
-
-      <motion.section className="relative mx-auto mt-14 max-w-[1420px] px-5 sm:px-8 lg:px-10" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-        <div className="relative overflow-hidden rounded-[28px] border border-blue-100 bg-gradient-to-r from-[#071a45] via-[#0d377c] to-[#0a7cc2] p-6 text-white shadow-[0_26px_70px_rgba(18,103,244,0.18)] sm:p-8">
-          <div className="absolute -right-12 -top-20 h-64 w-64 rounded-full border border-white/10" />
-          <div className="absolute -bottom-24 left-1/3 h-56 w-56 rounded-full bg-cyan-300/15 blur-3xl" />
-          <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-center gap-4">
-              <span className="grid h-13 w-13 place-items-center rounded-2xl border border-white/15 bg-white/10 text-cyan-200 backdrop-blur-xl"><Rocket size={22} /></span>
-              <div><p className="text-xs font-black uppercase tracking-[0.17em] text-cyan-200">Coming Soon</p><h2 className="mt-1 text-xl font-extrabold">More digital products are in development.</h2></div>
-            </div>
-            <div className="flex items-center gap-3 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-xl">
-              <Layers3 className="text-cyan-200" size={19} />
-              <div><b className="text-sm">MobiiG</b><p className="text-xs text-blue-100">Cycle &amp; Motor Stop</p></div>
-              <span className="ml-auto rounded-full bg-cyan-200 px-3 py-1.5 text-[10px] font-black text-blue-950">IN DEVELOPMENT</span>
-            </div>
-          </div>
-        </div>
-      </motion.section>
 
       <AnimatePresence>{selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}</AnimatePresence>
     </main>

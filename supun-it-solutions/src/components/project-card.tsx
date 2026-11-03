@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Layers3 } from "lucide-react";
@@ -20,8 +20,6 @@ export function ProjectCover({ project, priority = false, className = "" }: { pr
     return [...new Set(list)];
   }, [project.image, project.imageCandidates]);
   const [index, setIndex] = useState(0);
-
-  useEffect(() => setIndex(0), [project.id]);
 
   if (!candidates[index]) {
     return (
@@ -56,34 +54,31 @@ export function ProjectCard({ project, onOpen, index = 0 }: { project: Project; 
   return (
     <motion.article
       layout
-      initial={{ opacity: 0, y: 24 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 12 }}
       transition={{ duration: 0.45, delay: index * 0.045 }}
-      whileHover={{ y: -7 }}
-      className="group relative flex h-full min-h-[490px] flex-col overflow-hidden rounded-[30px] border border-white/80 bg-white/88 shadow-[0_20px_65px_rgba(30,80,150,0.10)] backdrop-blur-2xl transition-all duration-500 hover:border-blue-200/80 hover:shadow-[0_32px_90px_rgba(18,103,244,0.18)]"
+      whileHover={{ y: -8 }}
+      className="group relative flex h-full min-h-[500px] w-full min-w-0 max-w-full flex-col overflow-hidden rounded-[32px] border border-white/75 bg-white/60 shadow-[0_22px_70px_rgba(30,80,150,0.11)] backdrop-blur-2xl transition-all duration-500 hover:border-cyan-200/80 hover:bg-white/76 hover:shadow-[0_34px_100px_rgba(18,103,244,0.2)]"
     >
-      <div className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-blue-400/70 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="pointer-events-none absolute -right-16 -top-16 z-10 h-40 w-40 rounded-full bg-cyan-300/20 blur-3xl transition duration-700 group-hover:scale-125 group-hover:bg-blue-400/25" />
+      <div className="pointer-events-none absolute inset-x-10 top-0 z-20 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50 transition-opacity duration-500 group-hover:opacity-100" />
 
-      <div className="relative aspect-[16/10] overflow-hidden bg-blue-50">
+      <div className="relative m-3 aspect-[16/10] overflow-hidden rounded-[24px] bg-blue-50 sm:m-4">
         <ProjectCover project={project} priority={index < 3} />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#071a45]/50 via-transparent to-transparent opacity-55" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#061633]/65 via-transparent to-transparent opacity-70 transition duration-500 group-hover:opacity-55" />
 
-        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3">
+        <div className="absolute inset-x-4 bottom-4 flex items-end gap-3">
           <span className="rounded-full border border-white/45 bg-white/18 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-white shadow-lg backdrop-blur-xl">
             {project.category}
-          </span>
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/90 px-3 py-1.5 text-[10px] font-extrabold text-[#071a45] shadow-lg backdrop-blur-xl">
-            {project.status === "Live" && <i className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_0_4px_rgba(16,185,129,.13)]" />}
-            {project.status}
           </span>
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-6 sm:p-7">
+      <div className="flex flex-1 flex-col px-6 pb-6 pt-3 sm:px-7 sm:pb-7">
         <h2 className="text-[1.45rem] font-extrabold leading-[1.08] tracking-[-0.035em] text-[#071a45] sm:text-[1.55rem]">{project.title}</h2>
         {project.subtitle && <p className="mt-2 text-xs font-bold leading-5 text-blue-600">{project.subtitle}</p>}
-        <p className="mt-4 line-clamp-3 text-sm leading-6 text-slate-500">{project.description}</p>
+        <p className="mt-4 line-clamp-4 text-sm leading-6 text-slate-500">{project.description}</p>
 
         <div className="mt-5 flex flex-wrap gap-2">
           {project.tags.slice(0, 3).map((tag) => (
@@ -94,7 +89,7 @@ export function ProjectCard({ project, onOpen, index = 0 }: { project: Project; 
         </div>
 
         <button
-          className="mt-auto flex items-center justify-between border-t border-slate-100 pt-5 text-sm font-extrabold text-[#071a45] transition-colors hover:text-blue-600"
+          className="mt-auto flex items-center justify-between border-t border-blue-100/60 pt-5 text-sm font-extrabold text-[#071a45] transition-colors hover:text-blue-600"
           onClick={() => onOpen?.(project)}
           aria-label={`View details for ${project.title}`}
         >

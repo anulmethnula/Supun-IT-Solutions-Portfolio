@@ -1,5 +1,3 @@
-export type ProjectStatus = "Live" | "Internal System" | "In Development";
-
 export type Project = {
   id: string;
   title: string;
@@ -11,9 +9,6 @@ export type Project = {
   image?: string;
   imageCandidates?: string[];
   imageAlt: string;
-  status: ProjectStatus;
-  liveUrl?: string;
-  liveLabel?: string;
   technologies: string[];
   features: string[];
   businessProblem: string;
@@ -33,9 +28,11 @@ export const projects: Project[] = [
     subtitle: "CAMY Global Marketing • Fuji Industries • CAMY Smart",
     description: "Custom ERP solutions connecting finance, procurement, inventory, manufacturing and operational workflows in one controlled business environment.",
     category: "ERP Systems",
-    secondaryCategories: ["Business Systems", "Internal Systems"],
+    secondaryCategories: ["Business Systems"],
     tags: ["ERP", "Finance", "Procurement", "Manufacturing"],
+    image: "/images/projects/covers/enterprise-erp.png",
     imageCandidates: [
+      "/images/projects/covers/enterprise-erp.png",
       "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_03 PM - 1.png",
       "/images/ChatGPT Image Nov 3, 2026, 02_28_03 PM - 1.png",
       "/ChatGPT Image Nov 3, 2026, 02_28_03 PM - 1.png",
@@ -44,7 +41,6 @@ export const projects: Project[] = [
       "/enterprise_erp_systems_dashboard.png",
     ],
     imageAlt: "Enterprise ERP Systems dashboard cover",
-    status: "Internal System",
     technologies: ["React", "TypeScript", "Node.js", "MySQL"],
     features: ["Supplier and purchase management", "Approval controls", "GRN and batch stock", "General ledger integration", "Role-based access"],
     businessProblem: "Finance, purchasing, stock and manufacturing activity needed a consistent operational trail across multiple Supun Group companies.",
@@ -63,8 +59,9 @@ export const projects: Project[] = [
     category: "Business Systems",
     secondaryCategories: ["Web Applications", "E-Commerce"],
     tags: ["Entrepreneur Platform", "COD", "Stock", "Payouts"],
-    image: "/images/projects/camy/camy-market.png",
+    image: "/images/projects/covers/camy-market.png",
     imageCandidates: [
+      "/images/projects/covers/camy-market.png",
       "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_05 PM - 2.png",
       "/images/ChatGPT Image Nov 3, 2026, 02_28_05 PM - 2.png",
       "/ChatGPT Image Nov 3, 2026, 02_28_05 PM - 2.png",
@@ -77,9 +74,6 @@ export const projects: Project[] = [
       "/images/projects/camy/camy-market.png",
     ],
     imageAlt: "CAMY Entrepreneurs Digital Platform cover",
-    status: "Live",
-    liveUrl: "https://camymarket.com/",
-    liveLabel: "View Live",
     technologies: ["React", "Vite", "PHP", "MySQL"],
     features: ["Entrepreneur product browsing", "Custom selling prices", "COD orders and tracking", "Earnings and payouts", "Warehouse and courier operations", "Credit-stock eligibility"],
     businessProblem: "Entrepreneurs needed one place to sell products while operations teams managed stock, COD fulfilment, courier data, earnings and credit.",
@@ -95,8 +89,9 @@ export const projects: Project[] = [
     description: "A full redesign of the Supun Group corporate website, creating a modern digital experience for the group's businesses, brands and company information.",
     category: "Web Applications",
     tags: ["Corporate Website", "Website Redesign", "React", "Admin System"],
-    image: "/images/projects/supun-group/supun-group.png",
+    image: "/images/projects/covers/supun-group.png",
     imageCandidates: [
+      "/images/projects/covers/supun-group.png",
       "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_06 PM - 3.png",
       "/images/ChatGPT Image Nov 3, 2026, 02_28_06 PM - 3.png",
       "/ChatGPT Image Nov 3, 2026, 02_28_06 PM - 3.png",
@@ -106,9 +101,6 @@ export const projects: Project[] = [
       "/images/projects/supun-group/supun-group.png",
     ],
     imageAlt: "Supun Group website redesign cover",
-    status: "Live",
-    liveUrl: "https://supuncompanies.com/",
-    liveLabel: "Visit Website",
     technologies: ["React", "TypeScript", "Vite", "Tailwind", "Node.js", "Express"],
     features: ["Editable company content", "Reusable components", "Optimized media", "Hero video", "Administration API", "Responsive design"],
     businessProblem: "The group needed a contemporary corporate presence capable of presenting many businesses, brands and stories as one clear experience.",
@@ -123,9 +115,11 @@ export const projects: Project[] = [
     title: "Guest Feedback Management System",
     description: "A QR-based guest feedback platform that lets customers submit structured feedback while giving management a secure system for reviewing responses and improving service quality.",
     category: "Business Systems",
-    secondaryCategories: ["Mobile Applications", "Internal Systems"],
+    secondaryCategories: ["Mobile Applications"],
     tags: ["QR Feedback", "Hospitality", "Firebase", "Web & Mobile"],
+    image: "/images/projects/covers/guest-feedback.png",
     imageCandidates: [
+      "/images/projects/covers/guest-feedback.png",
       "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_08 PM - 4.png",
       "/images/ChatGPT Image Nov 3, 2026, 02_28_08 PM - 4.png",
       "/ChatGPT Image Nov 3, 2026, 02_28_08 PM - 4.png",
@@ -134,7 +128,6 @@ export const projects: Project[] = [
       "/guest_feedback_management_system.png",
     ],
     imageAlt: "Guest Feedback Management System cover",
-    status: "Internal System",
     technologies: ["React", "Firebase", "Capacitor"],
     features: ["QR access by location or zone", "Structured multi-step forms", "Secure management area", "Firebase Authentication", "Email notifications", "Android and iOS support"],
     businessProblem: "Guest feedback was difficult to collect consistently by venue area and convert into timely, actionable management insight.",
@@ -148,9 +141,10 @@ export const projects: Project[] = [
     title: "AeroSoft360 ERP",
     description: "A database-backed finance, manufacturing and management ERP designed around controlled workflows, inventory movements and accounting integrity.",
     category: "ERP Systems",
-    secondaryCategories: ["Internal Systems"],
     tags: ["ERP", "Manufacturing", "Finance", "Inventory"],
+    image: "/images/projects/covers/aerosoft360.png",
     imageCandidates: [
+      "/images/projects/covers/aerosoft360.png",
       "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_10 PM - 5.png",
       "/images/ChatGPT Image Nov 3, 2026, 02_28_10 PM - 5.png",
       "/ChatGPT Image Nov 3, 2026, 02_28_10 PM - 5.png",
@@ -159,7 +153,6 @@ export const projects: Project[] = [
       "/aerosoft360_erp_dashboard_hero.png",
     ],
     imageAlt: "AeroSoft360 ERP dashboard cover",
-    status: "Internal System",
     technologies: ["React", "Node.js", "MySQL", "REST API"],
     features: ["Purchase management", "Approval workflow", "GRN", "Raw material batches", "Inventory and finance", "Role-based access"],
     businessProblem: "Manufacturing transactions required controlled approvals, traceable material movements and dependable accounting integration.",
@@ -171,4 +164,4 @@ export const projects: Project[] = [
   },
 ];
 
-export const categories = ["All Projects", "ERP Systems", "Web Applications", "Business Systems", "E-Commerce", "Mobile Applications", "Internal Systems"];
+export const categories = ["All Projects", "ERP Systems", "Web Applications", "Business Systems", "E-Commerce", "Mobile Applications"];
