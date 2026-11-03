@@ -36,14 +36,14 @@ export default function Contact() {
   };
 
   return (
-    <main className="relative overflow-hidden bg-white px-5 pb-20 pt-20 sm:px-8 lg:px-10 lg:pt-24">
+    <main className="relative overflow-hidden bg-white px-5 pb-20 pt-12 sm:px-8 lg:px-10 lg:pt-14">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-24 top-24 h-80 w-80 rounded-full bg-blue-400/10 blur-3xl"
+        className="pointer-events-none absolute -left-24 top-20 h-80 w-80 rounded-full bg-blue-400/10 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-28 top-52 h-96 w-96 rounded-full bg-cyan-300/15 blur-3xl"
+        className="pointer-events-none absolute -right-28 top-40 h-96 w-96 rounded-full bg-cyan-300/15 blur-3xl"
       />
       <div
         aria-hidden="true"
@@ -51,33 +51,27 @@ export default function Contact() {
       />
 
       <section className="relative mx-auto max-w-[1420px]">
-        <div className="mb-10 text-center lg:mb-12">
-          <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-[-0.045em] text-[#071a45] sm:text-5xl lg:text-6xl">
-            Have an idea? <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">Let&apos;s build it together.</span>
-          </h1>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
-          <aside className="relative overflow-hidden rounded-[30px] border border-white/80 bg-gradient-to-br from-white/90 via-white/80 to-blue-50/75 p-7 shadow-[0_24px_70px_rgba(18,103,244,0.10)] backdrop-blur-2xl sm:p-9 lg:p-10">
+        <div className="grid items-stretch gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:gap-8">
+          <aside className="relative flex h-full min-h-[560px] overflow-hidden rounded-[30px] border border-white/80 bg-gradient-to-br from-white/92 via-white/84 to-blue-50/80 p-7 shadow-[0_24px_70px_rgba(18,103,244,0.10)] backdrop-blur-2xl sm:p-9 lg:p-10">
             <div
               aria-hidden="true"
               className="absolute -right-20 -top-16 h-56 w-56 rounded-full bg-gradient-to-br from-blue-500/15 to-cyan-300/20 blur-2xl"
             />
 
-            <div className="relative">
+            <div className="relative flex w-full flex-col justify-center">
               <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1267F4] to-[#00A7FF] text-white shadow-[0_12px_30px_rgba(18,103,244,0.25)]">
                 <MessageSquareText size={26} />
               </div>
 
               <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-blue-600">Supun IT Solutions</p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#071a45] sm:text-4xl">
+              <h1 className="mt-3 text-3xl font-extrabold tracking-[-0.035em] text-[#071a45] sm:text-4xl">
                 Start a conversation.
-              </h2>
+              </h1>
 
               <div className="mt-9 space-y-3">
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="group flex items-center gap-4 rounded-2xl border border-blue-100/80 bg-white/75 p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_12px_28px_rgba(18,103,244,0.10)]"
+                  className="group flex items-center gap-4 rounded-2xl border border-blue-100/80 bg-white/80 p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_12px_28px_rgba(18,103,244,0.10)]"
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition group-hover:bg-blue-600 group-hover:text-white">
                     <Mail size={20} />
@@ -93,7 +87,7 @@ export default function Contact() {
                   href={siteConfig.supunGroupUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 rounded-2xl border border-blue-100/80 bg-white/75 p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_12px_28px_rgba(18,103,244,0.10)]"
+                  className="group flex items-center gap-4 rounded-2xl border border-blue-100/80 bg-white/80 p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-[0_12px_28px_rgba(18,103,244,0.10)]"
                 >
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600 transition group-hover:bg-gradient-to-br group-hover:from-blue-600 group-hover:to-cyan-500 group-hover:text-white">
                     <Globe2 size={20} />
@@ -110,7 +104,7 @@ export default function Contact() {
 
           <form
             onSubmit={handleSubmit}
-            className="rounded-[30px] border border-white/80 bg-white/75 p-6 shadow-[0_24px_70px_rgba(18,103,244,0.10)] backdrop-blur-2xl sm:p-8 lg:p-10"
+            className="h-full min-h-[560px] rounded-[30px] border border-white/80 bg-white/80 p-6 shadow-[0_24px_70px_rgba(18,103,244,0.10)] backdrop-blur-2xl sm:p-8 lg:p-10"
           >
             <div className="mb-7">
               <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-blue-600">Send a message</p>
@@ -124,7 +118,7 @@ export default function Contact() {
                   name="name"
                   placeholder="Your name"
                   required
-                  className="mt-2 w-full rounded-2xl border border-blue-100 bg-white/80 px-4 py-3.5 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
+                  className="mt-2 w-full rounded-2xl border border-blue-100 bg-white/85 px-4 py-3.5 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
                 />
               </label>
 
@@ -135,7 +129,7 @@ export default function Contact() {
                   type="email"
                   placeholder="you@company.com"
                   required
-                  className="mt-2 w-full rounded-2xl border border-blue-100 bg-white/80 px-4 py-3.5 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
+                  className="mt-2 w-full rounded-2xl border border-blue-100 bg-white/85 px-4 py-3.5 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
                 />
               </label>
             </div>
@@ -145,7 +139,7 @@ export default function Contact() {
               <input
                 name="company"
                 placeholder="Company name"
-                className="mt-2 w-full rounded-2xl border border-blue-100 bg-white/80 px-4 py-3.5 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
+                className="mt-2 w-full rounded-2xl border border-blue-100 bg-white/85 px-4 py-3.5 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
               />
             </label>
 
@@ -154,7 +148,7 @@ export default function Contact() {
               <input
                 name="subject"
                 placeholder="How can we help?"
-                className="mt-2 w-full rounded-2xl border border-blue-100 bg-white/80 px-4 py-3.5 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
+                className="mt-2 w-full rounded-2xl border border-blue-100 bg-white/85 px-4 py-3.5 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
               />
             </label>
 
@@ -165,7 +159,7 @@ export default function Contact() {
                 rows={6}
                 placeholder="Tell us about your project, idea or challenge..."
                 required
-                className="mt-2 w-full resize-y rounded-2xl border border-blue-100 bg-white/80 px-4 py-3.5 font-medium leading-6 text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
+                className="mt-2 w-full resize-y rounded-2xl border border-blue-100 bg-white/85 px-4 py-3.5 font-medium leading-6 text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70"
               />
             </label>
 
