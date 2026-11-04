@@ -23,16 +23,13 @@ export default function Contact() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-[radial-gradient(120%_100%_at_50%_100%,rgba(18,103,244,.22),rgba(0,167,255,.08)_48%,transparent_49%)]" />
 
       <section className="relative mx-auto grid max-w-[1440px] items-start gap-8 lg:grid-cols-[0.4fr_0.6fr] lg:gap-12">
-        <div className="relative min-w-0 lg:flex lg:min-h-[650px] lg:flex-col lg:justify-center">
-          <div className="inline-flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.22em] text-[#1267F4]">
-            <span>Contact us</span><i className="h-px w-12 bg-gradient-to-r from-[#1267F4] to-[#00A7FF]" />
-          </div>
-          <h1 className="mt-5 max-w-xl text-4xl font-extrabold leading-[1.08] tracking-[-0.05em] text-[#071A45] sm:text-5xl lg:text-[3.6rem]">
+        <div className="relative min-w-0 text-center lg:flex lg:min-h-[650px] lg:flex-col lg:items-center lg:justify-center">
+          <h1 className="mx-auto max-w-xl text-4xl font-extrabold leading-[1.16] tracking-[-0.045em] text-[#071A45] sm:text-5xl lg:text-[3.6rem] lg:leading-[1.14]">
             Get in Touch<br />with <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">Our Team</span>
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-7 text-slate-600">For general inquiries about Supun IT Solutions and our work within the Supun Group of Companies, feel free to contact us.</p>
+          <p className="mx-auto mt-7 max-w-xl text-base leading-8 text-slate-600">For general inquiries about Supun IT Solutions and our work within the Supun Group of Companies, feel free to contact us.</p>
 
-          <div className="mt-8 space-y-4">
+          <div className="mt-10 w-full space-y-5 text-left">
             <a href={`mailto:${siteConfig.email}`} className="group flex items-center gap-4 rounded-[22px] border border-white/90 bg-white/75 p-4 shadow-[0_14px_36px_rgba(18,103,244,0.09)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(18,103,244,0.15)]">
               <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 text-[#1267F4]"><Mail size={21} /></span>
               <span className="min-w-0 flex-1"><span className="block text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Email us</span><span className="mt-1 block truncate font-extrabold text-[#071A45]">{siteConfig.email}</span></span>

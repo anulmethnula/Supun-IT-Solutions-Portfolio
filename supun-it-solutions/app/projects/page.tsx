@@ -367,8 +367,6 @@ export default function Projects() {
             >
               <span aria-hidden="true" className={`absolute -bottom-16 -right-12 h-40 w-40 rounded-full ${comingSoonVisuals[index].glow} blur-2xl transition duration-500 group-hover:scale-125`} />
               <span aria-hidden="true" className="absolute -right-10 -top-12 h-36 w-36 rounded-full border-[25px] border-white/45" />
-              <span aria-hidden="true" className={`absolute inset-x-8 top-0 h-[2px] bg-gradient-to-r ${comingSoonVisuals[index].line}`} />
-              <span aria-hidden="true" className={`absolute left-0 top-0 h-full w-1 bg-gradient-to-b ${comingSoonVisuals[index].line} opacity-70`} />
 
               <span className={`relative grid h-14 w-14 shrink-0 place-items-center rounded-[18px] border border-white/70 bg-gradient-to-br ${comingSoonVisuals[index].iconGradient} text-white shadow-[0_12px_28px_rgba(18,103,244,0.20)] ring-4 ring-white/55 transition duration-300 group-hover:rotate-[-5deg] group-hover:scale-105`}>
                 {index === 0 ? <HeartHandshake size={24} /> : index === 1 ? <PanelsTopLeft size={24} /> : <ShoppingBag size={24} />}

@@ -225,7 +225,7 @@ export default function AboutPage() {
             {values.map((value) => {
               const Icon = value.icon;
               return (
-                <motion.div key={value.title} initial={false} whileHover={{ y: -5 }} className="rounded-2xl border border-[#1267F4]/10 bg-white/80 p-5 shadow-[0_12px_32px_rgba(24,82,145,.07)]">
+                <motion.div key={value.title} initial={false} whileHover={{ y: -5 }} className="flex min-h-64 flex-col items-center justify-center rounded-2xl border border-[#1267F4]/10 bg-white/80 p-6 text-center shadow-[0_12px_32px_rgba(24,82,145,.07)]">
                   <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#EBF5FF] text-[#1267F4]">
                     <Icon size={21} />
                   </div>

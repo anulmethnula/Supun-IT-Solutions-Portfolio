@@ -10,6 +10,14 @@ import { ArrowUpRight, Building2, Menu, X } from "lucide-react";
 import { navItems, siteConfig } from "@/src/data/site";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-shell" });
+const sectionIds = ["home", "about", "projects", "team", "tech-stack", "contact"] as const;
+const legacyRoutes: Record<string, string> = {
+  "/about": "about",
+  "/projects": "projects",
+  "/team": "team",
+  "/tech-stack": "tech-stack",
+  "/contact": "contact",
+};
 
 export function Brand({ footer = false }: { footer?: boolean }) {
   return (
@@ -31,20 +39,45 @@ export function Navbar() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const legacySection = legacyRoutes[path];
+    if (legacySection) {
+      window.location.replace(`/#${legacySection}`);
+      return;
+    }
+
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      if (path !== "/") return;
+
+      const marker = window.scrollY + 150;
+      let current = "home";
+      for (const id of sectionIds) {
+        const section = document.getElementById(id);
+        if (section && section.offsetTop <= marker) current = id;
+      }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = "contact";
+      setActiveSection(current);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [path]);
+
+  const isActive = (href: string) => href.endsWith(`#${activeSection}`);
 
   return (
     <header className={`nav nav-v2 ${manrope.variable}${scrolled ? " is-scrolled" : ""}`}>
       <div className="nav-inner-v2">
         <Brand />
         <nav className="desktop-nav-v2" aria-label="Primary navigation">
-          {navItems.map(([name, href]) => <Link className={path === href ? "active" : ""} href={href} key={href}>{name}</Link>)}
+          {navItems.map(([name, href]) => <Link className={path === "/" && isActive(href) ? "active" : ""} href={href} key={href}>{name}</Link>)}
         </nav>
         <GroupLink />
         <button className="menu-btn-v2" onClick={() => setOpen((value) => !value)} aria-label={open ? "Close navigation menu" : "Open navigation menu"} aria-expanded={open} aria-controls="mobile-navigation">
@@ -54,7 +87,7 @@ export function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.nav id="mobile-navigation" className="mobile-nav-v2" aria-label="Mobile navigation" initial={{ opacity: 0, y: -12, scale: .98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: .98 }} transition={{ duration: .22 }}>
-            {navItems.map(([name, href]) => <Link className={path === href ? "active" : ""} href={href} key={href} onClick={() => setOpen(false)}>{name}</Link>)}
+            {navItems.map(([name, href]) => <Link className={path === "/" && isActive(href) ? "active" : ""} href={href} key={href} onClick={() => setOpen(false)}>{name}</Link>)}
             <span className="mobile-nav-divider" />
             <GroupLink mobile />
           </motion.nav>

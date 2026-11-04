@@ -3,6 +3,11 @@ import { projects } from "@/src/data/projects";
 import { Marquee, PrimaryButton, Reveal, SecondaryButton } from "@/src/components/ui";
 import { VideoPlayer } from "@/src/components/video-player";
 import { ProjectCard } from "@/src/components/project-card";
+import AboutPage from "@/app/about/page";
+import Projects from "@/app/projects/page";
+import Team from "@/app/team/page";
+import TechStack from "@/app/tech-stack/page";
+import Contact from "@/app/contact/page";
 
 const services = [
   { icon: Layers3, title: "ERP & Enterprise Systems", text: "Finance, procurement, inventory and operational control built around real workflows." },
@@ -18,7 +23,8 @@ export default function Home() {
   const featured = projects.filter((project) => project.featured).slice(0, 3);
 
   return (
-    <main className="overflow-hidden bg-white">
+    <div className="overflow-hidden bg-white">
+      <div id="home" className="portfolio-section">
       <section className="relative mx-auto max-w-[1500px] px-5 pb-14 pt-20 sm:px-8 lg:px-10 lg:pb-20 lg:pt-24">
         <div aria-hidden="true" className="pointer-events-none absolute -left-28 top-10 h-[34rem] w-[34rem] rounded-full bg-blue-300/15 blur-3xl" />
         <div aria-hidden="true" className="pointer-events-none absolute -right-28 top-28 h-[38rem] w-[38rem] rounded-full bg-cyan-300/15 blur-3xl" />
@@ -37,8 +43,8 @@ export default function Home() {
             <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">We design and build ERP systems, web applications and digital platforms for real operations across the Supun Group of Companies.</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <PrimaryButton href="/projects">View Projects</PrimaryButton>
-              <SecondaryButton href="/team">Meet Our Team</SecondaryButton>
+              <PrimaryButton href="/#projects">View Projects</PrimaryButton>
+              <SecondaryButton href="/#team">Meet Our Team</SecondaryButton>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-2">
@@ -90,7 +96,7 @@ export default function Home() {
               <h2 className="mt-4 text-4xl font-extrabold tracking-[-0.045em] text-slate-950 sm:text-5xl">Systems already solving real business problems.</h2>
               <p className="mt-4 text-base leading-7 text-slate-600">Selected work across enterprise operations, digital commerce and corporate web experiences.</p>
             </div>
-            <PrimaryButton href="/projects">Explore all projects</PrimaryButton>
+            <PrimaryButton href="/#projects">Explore all projects</PrimaryButton>
           </div>
 
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -98,6 +104,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+      </div>
+
+      <div id="about" className="portfolio-section"><AboutPage /></div>
+      <div id="projects" className="portfolio-section"><Projects /></div>
+      <div id="team" className="portfolio-section"><Team /></div>
+      <div id="tech-stack" className="portfolio-section"><TechStack /></div>
+      <div id="contact" className="portfolio-section"><Contact /></div>
+    </div>
   );
 }

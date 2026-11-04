@@ -11,6 +11,6 @@ export const siteConfig = {
 };
 
 export const navItems = [
-  ["Home", "/"], ["About", "/about"], ["Projects", "/projects"],
-  ["Team", "/team"], ["Tech Stack", "/tech-stack"], ["Contact", "/contact"],
+  ["Home", "/#home"], ["About", "/#about"], ["Projects", "/#projects"],
+  ["Team", "/#team"], ["Tech Stack", "/#tech-stack"], ["Contact", "/#contact"],
 ] as const;
