@@ -44,7 +44,7 @@ const values = [
 export default function AboutPage() {
   return (
     <main className="relative overflow-hidden bg-white text-[#071A45]">
-      <style jsx global>{`
+      <style>{`
         @keyframes about-logo-marquee {
           from { transform: translateX(0); }
           to { transform: translateX(-50%); }
@@ -74,14 +74,14 @@ export default function AboutPage() {
           initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10"
+          className="relative z-10 min-w-0"
         >
           <div className="mb-6 flex items-center gap-3 text-xs font-extrabold tracking-[0.24em] text-[#1267F4] sm:text-sm">
             <span>ABOUT SUPUN IT SOLUTIONS</span>
             <span className="h-px w-12 bg-gradient-to-r from-[#1267F4] to-[#00A7FF]" />
           </div>
 
-          <h1 className="max-w-[720px] text-[clamp(3rem,5.6vw,6rem)] font-extrabold leading-[0.96] tracking-[-0.055em]">
+          <h1 className="max-w-[720px] text-[2.5rem] font-extrabold leading-[0.98] tracking-[-0.055em] sm:text-[clamp(3rem,5.6vw,6rem)] sm:leading-[0.96]">
             We Are Part of{" "}
             <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">
               Supun Group of Companies
