@@ -1,7 +1,8 @@
 "use client";
 
 import type { FormEvent } from "react";
-import { ArrowUpRight, Mail, MessageSquareText, Send } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight, Mail, MessageSquareText, Send, Tag, UserRound, UsersRound } from "lucide-react";
 import { siteConfig } from "@/src/data/site";
 
 export default function Contact() {
@@ -10,53 +11,64 @@ export default function Contact() {
     const form = new FormData(event.currentTarget);
     const name = String(form.get("name") || "").trim();
     const email = String(form.get("email") || "").trim();
+    const subject = String(form.get("subject") || "General inquiry").trim();
     const message = String(form.get("message") || "").trim();
-    const body = [`Name: ${name}`, `Email: ${email}`, "", "Message:", message].join("\n");
-    window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent("Contact from Supun IT Solutions website")}&body=${encodeURIComponent(body)}`;
+    const body = [`Name: ${name}`, `Email: ${email}`, `Subject: ${subject}`, "", "Message:", message].join("\n");
+    window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
-    <main className="relative overflow-hidden bg-white px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20">
-      <div aria-hidden="true" className="pointer-events-none absolute left-[8%] top-16 h-72 w-72 rounded-full bg-blue-400/10 blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute right-[5%] top-28 h-80 w-80 rounded-full bg-cyan-300/14 blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-52 bg-gradient-to-t from-blue-50/80 to-transparent" />
+    <main className="relative overflow-hidden bg-[linear-gradient(135deg,#ffffff_0%,#f5faff_48%,#eaf7ff_100%)] px-5 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16">
+      <div aria-hidden="true" className="pointer-events-none absolute -left-32 top-16 h-96 w-96 rounded-full bg-blue-300/16 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-32 top-0 h-[30rem] w-[30rem] rounded-full bg-cyan-300/18 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-[radial-gradient(120%_100%_at_50%_100%,rgba(18,103,244,.22),rgba(0,167,255,.08)_48%,transparent_49%)]" />
 
-      <section className="relative mx-auto max-w-[1320px]">
-        <div className="grid items-start gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-10">
-          <div className="relative overflow-hidden rounded-[30px] border border-white/85 bg-gradient-to-br from-blue-50/85 via-white/72 to-cyan-50/75 p-7 shadow-[0_24px_70px_rgba(18,103,244,0.1)] backdrop-blur-2xl sm:p-9 lg:p-10">
-            <div aria-hidden="true" className="absolute -left-20 -top-20 h-60 w-60 rounded-full border-[34px] border-blue-400/8" />
-            <div aria-hidden="true" className="absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-gradient-to-br from-blue-500/10 to-cyan-300/20 blur-2xl" />
+      <section className="relative mx-auto grid max-w-[1440px] items-start gap-8 lg:grid-cols-[0.4fr_0.6fr] lg:gap-12">
+        <div className="relative min-w-0">
+          <div className="inline-flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.22em] text-[#1267F4]">
+            <span>Contact us</span><i className="h-px w-12 bg-gradient-to-r from-[#1267F4] to-[#00A7FF]" />
+          </div>
+          <h1 className="mt-5 max-w-xl text-4xl font-extrabold leading-[1.08] tracking-[-0.05em] text-[#071A45] sm:text-5xl lg:text-[3.6rem]">
+            Get in Touch<br />with <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">Our Team</span>
+          </h1>
+          <p className="mt-5 max-w-xl text-base leading-7 text-slate-600">For general inquiries about Supun IT Solutions and our work within the Supun Group of Companies, feel free to contact us.</p>
 
-            <div className="relative">
-              <span className="flex h-13 w-13 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1267F4] to-[#00A7FF] text-white shadow-[0_12px_28px_rgba(18,103,244,0.24)]">
-                <MessageSquareText size={24} />
-              </span>
-              <p className="mt-7 text-xs font-extrabold uppercase tracking-[0.2em] text-blue-600">Contact us</p>
-              <h1 className="mt-3 max-w-md text-4xl font-extrabold leading-[1.08] tracking-[-0.045em] text-[#071a45] sm:text-5xl">We&apos;re here to help.</h1>
-              <p className="mt-5 max-w-md text-base leading-7 text-slate-600">For general questions about Supun IT Solutions and our work within the Supun Group of Companies, send us a message.</p>
-            </div>
-
-            <a href={`mailto:${siteConfig.email}`} className="group relative mt-7 flex max-w-md items-center gap-4 rounded-2xl border border-white/90 bg-white/70 p-4 shadow-[0_10px_28px_rgba(18,103,244,0.08)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(18,103,244,0.14)]">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#1267F4] transition group-hover:bg-[#1267F4] group-hover:text-white"><Mail size={19} /></span>
-              <span className="min-w-0 flex-1"><span className="block text-[10px] font-extrabold uppercase tracking-[0.17em] text-slate-400">Email us</span><span className="mt-1 block truncate font-bold text-[#071a45]">{siteConfig.email}</span></span>
-              <ArrowUpRight className="text-blue-500 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" size={18} />
+          <div className="mt-6 space-y-3">
+            <a href={`mailto:${siteConfig.email}`} className="group flex items-center gap-4 rounded-[22px] border border-white/90 bg-white/75 p-4 shadow-[0_14px_36px_rgba(18,103,244,0.09)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(18,103,244,0.15)]">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 text-[#1267F4]"><Mail size={21} /></span>
+              <span className="min-w-0 flex-1"><span className="block text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Email us</span><span className="mt-1 block truncate font-extrabold text-[#071A45]">{siteConfig.email}</span></span>
+              <ArrowUpRight size={19} className="text-[#1267F4] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+            <a href="https://supuncompanies.com/" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 rounded-[22px] border border-white/90 bg-white/75 p-4 shadow-[0_14px_36px_rgba(18,103,244,0.09)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(18,103,244,0.15)]">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-cyan-50 text-[#00A7FF]"><UsersRound size={22} /></span>
+              <span className="min-w-0 flex-1"><span className="block text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Company</span><span className="mt-1 block truncate font-extrabold text-[#071A45]">Supun Group of Companies</span></span>
+              <ArrowUpRight size={19} className="text-[#1267F4] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
 
-          <form onSubmit={handleSubmit} className="rounded-[30px] border border-white/85 bg-white/78 p-7 shadow-[0_24px_70px_rgba(18,103,244,0.1)] backdrop-blur-2xl sm:p-9 lg:p-10">
-            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-blue-600">Send a message</p>
-            <h2 className="mt-2 text-3xl font-extrabold tracking-[-0.035em] text-[#071a45]">Contact our team</h2>
-            <p className="mt-3 max-w-lg text-sm leading-6 text-slate-500">Complete the short form below and your email application will prepare the message for you.</p>
-
-            <div className="mt-7 space-y-5">
-              <label className="block text-sm font-bold text-[#071a45]">Name<input name="name" placeholder="Your name" required className="mt-2.5 w-full rounded-2xl border border-blue-100/90 bg-white/80 px-4 py-3.5 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70" /></label>
-              <label className="block text-sm font-bold text-[#071a45]">Email<input name="email" type="email" placeholder="you@example.com" required className="mt-2.5 w-full rounded-2xl border border-blue-100/90 bg-white/80 px-4 py-3.5 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70" /></label>
-              <label className="block text-sm font-bold text-[#071a45]">Message<textarea name="message" rows={5} placeholder="Write your message..." required className="mt-2.5 w-full resize-y rounded-2xl border border-blue-100/90 bg-white/80 px-4 py-3.5 font-medium leading-6 text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-100/70" /></label>
-            </div>
-
-            <button className="mt-7 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#1267F4] to-[#00A7FF] px-7 py-3.5 font-extrabold text-white shadow-[0_12px_28px_rgba(18,103,244,0.24)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(18,103,244,0.30)]" type="submit">Send Message <Send size={18} /></button>
-          </form>
+          <div className="relative mt-5 h-64 overflow-hidden rounded-[28px] border border-white/80 shadow-[0_20px_55px_rgba(18,103,244,0.15)] sm:h-72">
+            <Image src="/images/projects/covers/supun-group.png" alt="Supun Arcade building" fill priority sizes="(max-width: 1024px) 100vw, 40vw" className="origin-right scale-[2.25] object-cover object-right" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1267F4]/22 via-transparent to-white/5" />
+            <div aria-hidden="true" className="absolute -bottom-20 -left-12 h-36 w-[125%] rotate-[-4deg] rounded-[50%] bg-gradient-to-r from-[#1267F4]/80 to-[#00A7FF]/70 blur-[1px]" />
+          </div>
         </div>
+
+        <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-[32px] border border-white/85 bg-white/68 p-6 shadow-[0_28px_85px_rgba(18,103,244,0.13)] backdrop-blur-xl sm:p-8 lg:p-10">
+          <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-cyan-300/15 blur-3xl" />
+          <div className="relative flex items-center gap-4">
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[#1267F4] to-[#00A7FF] text-white shadow-[0_14px_32px_rgba(18,103,244,0.25)]"><Send size={24} /></span>
+            <div><p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#1267F4]">Send a message</p><h2 className="mt-1 text-3xl font-extrabold tracking-[-0.04em] text-[#071A45] sm:text-4xl">Contact our team.</h2></div>
+          </div>
+
+          <div className="relative mt-8 grid gap-5 sm:grid-cols-2">
+            <label className="block text-sm font-bold text-[#071A45]">Name<span className="relative mt-2.5 block"><UserRound className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#1267F4]" size={19} /><input name="name" placeholder="Your name" required className="w-full rounded-2xl border border-blue-200/90 bg-white/78 py-3.5 pl-12 pr-4 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-[#1267F4] focus:ring-4 focus:ring-blue-100/70" /></span></label>
+            <label className="block text-sm font-bold text-[#071A45]">Email<span className="relative mt-2.5 block"><Mail className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#1267F4]" size={19} /><input name="email" type="email" placeholder="you@example.com" required className="w-full rounded-2xl border border-blue-200/90 bg-white/78 py-3.5 pl-12 pr-4 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-[#1267F4] focus:ring-4 focus:ring-blue-100/70" /></span></label>
+            <label className="block text-sm font-bold text-[#071A45] sm:col-span-2">Subject<span className="relative mt-2.5 block"><Tag className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#1267F4]" size={19} /><input name="subject" placeholder="How can we help?" required className="w-full rounded-2xl border border-blue-200/90 bg-white/78 py-3.5 pl-12 pr-4 font-medium text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-[#1267F4] focus:ring-4 focus:ring-blue-100/70" /></span></label>
+            <label className="block text-sm font-bold text-[#071A45] sm:col-span-2">Message<span className="relative mt-2.5 block"><MessageSquareText className="pointer-events-none absolute left-4 top-4 text-[#1267F4]" size={19} /><textarea name="message" rows={6} placeholder="Write your message..." required className="w-full resize-y rounded-2xl border border-blue-200/90 bg-white/78 py-3.5 pl-12 pr-4 font-medium leading-6 text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-[#1267F4] focus:ring-4 focus:ring-blue-100/70" /></span></label>
+          </div>
+
+          <button className="relative mt-6 inline-flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-r from-[#1267F4] to-[#00A7FF] px-8 py-3.5 font-extrabold text-white shadow-[0_14px_32px_rgba(18,103,244,0.27)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(18,103,244,0.34)]" type="submit">Send Message <Send size={18} /></button>
+        </form>
       </section>
     </main>
   );
