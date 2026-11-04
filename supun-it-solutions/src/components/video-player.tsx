@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Maximize, Pause, Play, Volume2, VolumeX } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const defaultSources = [
   "/videos/hero-video.mp4",
@@ -15,46 +15,62 @@ const defaultSources = [
 
 export function CinematicHeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
+  const autoStartAttempted = useRef(false);
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(true);
+  const reduceMotion = useReducedMotion();
 
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => setReduceMotion(media.matches);
-    updatePreference();
-    media.addEventListener("change", updatePreference);
-    return () => media.removeEventListener("change", updatePreference);
+  const attemptPlayback = useCallback(() => {
+    if (!ref.current || autoStartAttempted.current) return;
+    const video = ref.current;
+    video.muted = true;
+    video.defaultMuted = true;
+    autoStartAttempted.current = true;
+    void video.play().catch(() => {
+      autoStartAttempted.current = false;
+      setPlaying(false);
+    });
   }, []);
 
   useEffect(() => {
-    if (!ready || reduceMotion || !ref.current) return;
-    void ref.current.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
-  }, [ready, reduceMotion]);
+    if (ready) attemptPlayback();
+  }, [attemptPlayback, ready]);
 
-  const toggle = () => {
+  const startPlayback = () => {
+    setReady(true);
+    attemptPlayback();
+  };
+
+  const toggle = async () => {
     if (!ref.current || !ready) return;
-    if (playing) ref.current.pause();
-    else void ref.current.play();
-    setPlaying((value) => !value);
+    if (playing) {
+      ref.current.pause();
+      return;
+    }
+    try {
+      await ref.current.play();
+    } catch {
+      setPlaying(false);
+    }
   };
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#04122f]">
-      <Image src="/images/projects/supun-group/supun-group.png" alt="Supun IT Solutions digital work" fill priority sizes="100vw" className="object-cover" />
+      <Image src="/images/about/area56-day.png" alt="Supun Group venue" fill priority sizes="100vw" className="object-cover" />
       {!failed ? (
         <video
           ref={ref}
           src="/videos/hero-video.mp4"
-          poster="/images/projects/supun-group/supun-group.png"
-          autoPlay={!reduceMotion}
+          poster="/images/about/area56-day.png"
+          autoPlay
           muted
           loop
           playsInline
           preload="auto"
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}
-          onLoadedData={() => setReady(true)}
+          onLoadedData={startPlayback}
+          onCanPlay={startPlayback}
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
           onError={() => setFailed(true)}

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Manrope } from "next/font/google";
+import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, ArrowUpRight, Building2, Menu, X } from "lucide-react";
@@ -52,7 +53,8 @@ export function Navbar() {
       setScrolled(window.scrollY > 24);
       if (path !== "/") return;
 
-      const marker = window.scrollY + 150;
+      const navHeight = document.querySelector<HTMLElement>("header.nav-v2")?.offsetHeight ?? 88;
+      const marker = window.scrollY + navHeight + 36;
       let current = "home";
       for (const id of sectionIds) {
         const section = document.getElementById(id);
@@ -64,20 +66,47 @@ export function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
+
+    const hashSection = window.location.hash.slice(1);
+    const restoreHashPosition = () => {
+      if (!sectionIds.includes(hashSection as (typeof sectionIds)[number])) return;
+      const target = document.getElementById(hashSection);
+      if (!target) return;
+      setActiveSection(hashSection);
+      target.scrollIntoView({ behavior: "auto", block: "start" });
+    };
+    const hashFrame = window.requestAnimationFrame(restoreHashPosition);
+    const hashTimer = window.setTimeout(restoreHashPosition, 250);
+
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.cancelAnimationFrame(hashFrame);
+      window.clearTimeout(hashTimer);
     };
   }, [path]);
 
   const isActive = (href: string) => href.endsWith(`#${activeSection}`);
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    const sectionId = href.split("#")[1];
+    if (path !== "/" || !sectionId) return;
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+
+    event.preventDefault();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setActiveSection(sectionId);
+    setOpen(false);
+    window.history.replaceState(null, "", `#${sectionId}`);
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  };
 
   return (
     <header className={`nav nav-v2 ${manrope.variable}${scrolled ? " is-scrolled" : ""}`}>
       <div className="nav-inner-v2">
         <Brand />
         <nav className="desktop-nav-v2" aria-label="Primary navigation">
-          {navItems.map(([name, href]) => <Link className={path === "/" && isActive(href) ? "active" : ""} href={href} key={href}>{name}</Link>)}
+          {navItems.map(([name, href]) => <Link className={path === "/" && isActive(href) ? "active" : ""} href={href} key={href} onClick={(event) => handleNavClick(event, href)}>{name}</Link>)}
         </nav>
         <GroupLink />
         <button className="menu-btn-v2" onClick={() => setOpen((value) => !value)} aria-label={open ? "Close navigation menu" : "Open navigation menu"} aria-expanded={open} aria-controls="mobile-navigation">
@@ -87,7 +116,7 @@ export function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.nav id="mobile-navigation" className="mobile-nav-v2" aria-label="Mobile navigation" initial={{ opacity: 0, y: -12, scale: .98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: .98 }} transition={{ duration: .22 }}>
-            {navItems.map(([name, href]) => <Link className={path === "/" && isActive(href) ? "active" : ""} href={href} key={href} onClick={() => setOpen(false)}>{name}</Link>)}
+            {navItems.map(([name, href]) => <Link className={path === "/" && isActive(href) ? "active" : ""} href={href} key={href} onClick={(event) => handleNavClick(event, href)}>{name}</Link>)}
             <span className="mobile-nav-divider" />
             <GroupLink mobile />
           </motion.nav>

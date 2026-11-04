@@ -22,17 +22,12 @@ export default function Home() {
       <div id="home" className="portfolio-section">
         <section className="relative isolate flex min-h-[calc(100svh-88px)] items-center overflow-hidden bg-[#04122f]">
           <CinematicHeroVideo />
-          <div aria-hidden="true" className="absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(3,13,39,.95)_0%,rgba(4,20,55,.84)_44%,rgba(4,20,55,.43)_72%,rgba(3,13,39,.60)_100%)]" />
-          <div aria-hidden="true" className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_72%_40%,rgba(0,167,255,.14),transparent_35%)]" />
+          <div aria-hidden="true" className="absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(3,13,39,.90)_0%,rgba(4,20,55,.72)_42%,rgba(4,20,55,.28)_70%,rgba(3,13,39,.12)_100%)]" />
+          <div aria-hidden="true" className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_72%_42%,rgba(0,167,255,.12),transparent_38%)]" />
 
           <div className="relative z-20 mx-auto w-full max-w-[1500px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
             <Reveal className="max-w-[850px]">
-              <div className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-cyan-200 shadow-lg backdrop-blur-xl">
-                <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_0_5px_rgba(103,232,249,.12)]" />
-                Supun IT Solutions
-              </div>
-
-              <h1 className="mt-7 text-5xl font-extrabold leading-[1.01] tracking-[-0.055em] text-white sm:text-6xl lg:text-[4.8rem] xl:text-[5.35rem]">
+              <h1 className="text-4xl font-extrabold leading-[1.06] tracking-[-0.045em] text-white sm:text-5xl lg:text-[3.9rem] xl:text-[4.3rem]">
                 Building digital systems that <span className="bg-gradient-to-r from-[#3B82F6] via-[#1597F5] to-[#35D8FF] bg-clip-text text-transparent">move the business forward.</span>
               </h1>
 
@@ -40,7 +35,7 @@ export default function Home() {
 
               <div className="mt-9 flex flex-wrap gap-3">
                 <PrimaryButton href="/#projects">View Projects</PrimaryButton>
-                <Link href="/#team" className="inline-flex items-center justify-center rounded-[13px] border border-white/30 bg-white/10 px-6 py-3.5 font-extrabold text-white shadow-lg backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-white/50 hover:bg-white/18">Meet Our Team</Link>
+                <Link href="/#team" className="inline-flex items-center justify-center rounded-[13px] border border-white/90 bg-white px-6 py-3.5 font-extrabold text-[#071A45] shadow-[0_12px_28px_rgba(0,0,0,.22)] transition hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-[0_16px_34px_rgba(0,0,0,.28)]">Meet Our Team</Link>
               </div>
             </Reveal>
           </div>
