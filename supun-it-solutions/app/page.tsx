@@ -1,4 +1,4 @@
-import { ArrowUpRight, BriefcaseBusiness, Code2, Layers3, ShoppingCart, Smartphone } from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, Code2, Layers3, ShoppingCart } from "lucide-react";
 import { PrimaryButton, Reveal, SecondaryButton } from "@/src/components/ui";
 import { VideoPlayer } from "@/src/components/video-player";
 import AboutPage from "@/app/about/page";
@@ -6,13 +6,13 @@ import Projects from "@/app/projects/page";
 import Team from "@/app/team/page";
 import TechStack from "@/app/tech-stack/page";
 import Contact from "@/app/contact/page";
+import { ScrollSection } from "@/src/components/scroll-section";
 
 const services = [
   { icon: Layers3, title: "ERP & Enterprise Systems", text: "Finance, procurement, inventory and operational control built around real workflows." },
   { icon: Code2, title: "Web Applications", text: "Fast, responsive portals and business platforms designed for everyday use." },
   { icon: BriefcaseBusiness, title: "Business Systems", text: "Internal tools that simplify operations, feedback, reporting and management." },
   { icon: ShoppingCart, title: "E-Commerce", text: "Digital selling, COD, fulfilment and entrepreneur-focused commerce experiences." },
-  { icon: Smartphone, title: "Mobile Experiences", text: "Responsive and cross-platform experiences for teams and customers on the move." },
 ] as const;
 
 export default function Home() {
@@ -62,12 +62,14 @@ export default function Home() {
           <p className="mt-4 text-base leading-7 text-slate-600">From internal operations to customer-facing platforms, every system starts with the real business process.</p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-          {services.map(({ icon: Icon, title, text }) => (
-            <Reveal key={title} className="group relative rounded-[24px] border border-blue-100 bg-white/80 p-6 shadow-[0_14px_45px_rgba(37,99,235,0.08)] backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(37,99,235,0.14)]">
-              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600"><Icon size={22} /></div>
-              <h3 className="mt-5 text-lg font-extrabold text-slate-950">{title}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {services.map(({ icon: Icon, title, text }, index) => (
+            <Reveal key={title} delay={index * 0.09} className="group relative flex min-h-[300px] flex-col items-center justify-center overflow-hidden rounded-[26px] border border-blue-100/90 bg-gradient-to-b from-white via-white to-blue-50/75 p-8 text-center shadow-[0_16px_45px_rgba(37,99,235,0.09)] backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-cyan-200 hover:shadow-[0_28px_65px_rgba(37,99,235,0.18)]">
+              <span aria-hidden="true" className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-cyan-300/0 blur-3xl transition duration-500 group-hover:bg-cyan-300/25" />
+              <span aria-hidden="true" className="absolute inset-x-12 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-500/45 to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
+              <div className="relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600 shadow-[0_10px_25px_rgba(18,103,244,.10)] transition duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg] group-hover:bg-gradient-to-br group-hover:from-blue-600 group-hover:to-cyan-400 group-hover:text-white"><Icon size={24} /></div>
+              <h3 className="relative mt-6 text-xl font-extrabold leading-8 text-slate-950">{title}</h3>
+              <p className="relative mt-4 max-w-[270px] text-sm leading-7 text-slate-600">{text}</p>
               <ArrowUpRight className="absolute right-5 top-5 h-4 w-4 text-blue-300 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-blue-600" />
             </Reveal>
           ))}
@@ -76,11 +78,11 @@ export default function Home() {
 
       </div>
 
-      <div id="about" className="portfolio-section"><AboutPage /></div>
-      <div id="projects" className="portfolio-section"><Projects /></div>
-      <div id="team" className="portfolio-section"><Team /></div>
-      <div id="tech-stack" className="portfolio-section"><TechStack /></div>
-      <div id="contact" className="portfolio-section"><Contact /></div>
+      <ScrollSection id="about"><AboutPage /></ScrollSection>
+      <ScrollSection id="projects"><Projects /></ScrollSection>
+      <ScrollSection id="team"><Team /></ScrollSection>
+      <ScrollSection id="tech-stack"><TechStack /></ScrollSection>
+      <ScrollSection id="contact"><Contact /></ScrollSection>
     </div>
   );
 }
