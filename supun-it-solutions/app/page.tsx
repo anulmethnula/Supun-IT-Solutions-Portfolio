@@ -1,5 +1,5 @@
 import { ArrowUpRight, BriefcaseBusiness, Code2, Layers3, ShoppingCart, Smartphone } from "lucide-react";
-import { Marquee, PrimaryButton, Reveal, SecondaryButton } from "@/src/components/ui";
+import { PrimaryButton, Reveal, SecondaryButton } from "@/src/components/ui";
 import { VideoPlayer } from "@/src/components/video-player";
 import AboutPage from "@/app/about/page";
 import Projects from "@/app/projects/page";
@@ -14,8 +14,6 @@ const services = [
   { icon: ShoppingCart, title: "E-Commerce", text: "Digital selling, COD, fulfilment and entrepreneur-focused commerce experiences." },
   { icon: Smartphone, title: "Mobile Experiences", text: "Responsive and cross-platform experiences for teams and customers on the move." },
 ] as const;
-
-const systems = ["Enterprise ERP Systems", "CAMY Entrepreneurs Digital Platform", "Supun Group Website Redesign", "Guest Feedback Management System", "AeroSoft360 ERP"];
 
 export default function Home() {
   return (
@@ -43,9 +41,6 @@ export default function Home() {
               <SecondaryButton href="/#team">Meet Our Team</SecondaryButton>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-2">
-              {["ERP Systems", "Web Applications", "Business Systems", "E-Commerce"].map((item) => <span key={item} className="rounded-full border border-blue-100 bg-blue-50/70 px-3 py-2 text-xs font-extrabold text-slate-700">{item}</span>)}
-            </div>
           </div>
 
           <Reveal className="relative">
@@ -59,11 +54,6 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
-
-      <div className="border-y border-blue-100 bg-gradient-to-r from-blue-50/60 via-white to-cyan-50/60 py-4">
-        <Marquee items={["ERP Systems", "Web Applications", "Business Systems", "E-Commerce", "Mobile Experiences", "Automation", "UI / UX"]} />
-        <Marquee items={systems} reverse />
-      </div>
 
       <section className="relative mx-auto max-w-[1500px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
