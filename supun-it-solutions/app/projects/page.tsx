@@ -18,6 +18,12 @@ import { ProjectCard, ProjectCover } from "@/src/components/project-card";
 
 const filters = ["All Projects", "ERP Systems", "Web Applications", "Business Systems", "E-Commerce"] as const;
 
+const comingSoonProjects = [
+  { name: "Keep and Care", detail: "Upcoming digital initiative", accent: "from-sky-50 to-cyan-50" },
+  { name: "WIP Project", detail: "Work in progress", accent: "from-violet-50 to-indigo-50" },
+  { name: "AnythingAtSupun E-Commerce Platform Redesign", detail: "Online shopping platform redesign", accent: "from-orange-50 to-amber-50" },
+] as const;
+
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => event.key === "Escape" && onClose();
@@ -213,6 +219,38 @@ export default function Projects() {
           {visible.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onOpen={setSelected} />)}
         </AnimatePresence>
       </section>
+
+      <motion.section
+        className="relative mx-auto mt-16 max-w-[1320px] px-5 sm:px-8 lg:px-10"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <div className="mb-6 flex items-center gap-3">
+          <Sparkles className="text-blue-600" size={23} />
+          <h2 className="text-2xl font-extrabold tracking-tight text-[#071a45] sm:text-3xl">Coming Soon</h2>
+        </div>
+        <div className="grid gap-5 md:grid-cols-3">
+          {comingSoonProjects.map((item, index) => (
+            <div
+              key={item.name}
+              className={`group relative flex min-h-[190px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/90 bg-gradient-to-br ${item.accent} p-6 shadow-[0_16px_48px_rgba(18,103,244,0.09)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_58px_rgba(18,103,244,0.15)]`}
+            >
+              <span aria-hidden="true" className="absolute -right-8 -top-9 h-36 w-36 rounded-full border-[24px] border-white/40" />
+              <div className="relative flex items-center justify-between gap-3">
+                <span className="rounded-full border border-blue-100/80 bg-white/80 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.13em] text-blue-700">
+                  Coming Soon
+                </span>
+                <span className="text-xs font-bold text-slate-400">0{index + 1}</span>
+              </div>
+              <div className="relative mt-7">
+                <h3 className="text-xl font-extrabold leading-tight text-[#071a45]">{item.name}</h3>
+                <p className="mt-2 text-sm text-slate-600">{item.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.section>
 
       <AnimatePresence>{selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}</AnimatePresence>
     </main>
