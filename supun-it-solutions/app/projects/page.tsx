@@ -8,6 +8,7 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
+  ExternalLink,
   Cpu,
   Sparkles,
   Target,
@@ -199,7 +200,18 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                   </div>
                 </div>
               </div>
-
+              {!project.sensitive && project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-7 flex items-center justify-between gap-3 rounded-2xl bg-gradient-to-r from-[#1267F4] to-[#00A7FF] px-5 py-4 text-sm font-extrabold text-white shadow-[0_14px_35px_rgba(18,103,244,0.23)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(18,103,244,0.32)]"
+                  aria-label={`Open ${project.title} live website in a new tab`}
+                >
+                  <span>{project.liveLabel ?? "Visit Live Website"}</span>
+                  <ExternalLink size={19} className="shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              )}
             </div>
           </aside>
         </div>
@@ -325,33 +337,35 @@ export default function Projects() {
       </section>
 
       <motion.section
-        className="relative mx-auto mt-16 w-full min-w-0 max-w-[1320px] px-5 sm:px-8 lg:px-10"
+        className="relative mx-auto mt-12 w-full min-w-0 max-w-[1320px] px-5 sm:px-8 lg:px-10"
         initial={false}
         animate={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
       >
-        <div className="mb-7 text-center">
-          <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-600"><Sparkles size={17} /><span>Coming Soon</span></div>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-[#071a45] sm:text-3xl">What we&apos;re building next</h2>
+        <div className="mb-5 flex items-center justify-center gap-2 text-center">
+          <Sparkles size={20} className="text-blue-600" />
+          <h2 className="text-2xl font-extrabold tracking-tight text-[#071a45] sm:text-[1.7rem]">Coming Soon</h2>
         </div>
-        <div className="grid gap-5 md:grid-cols-3">
+
+        <div className="grid gap-4 md:grid-cols-3">
           {comingSoonProjects.map((item, index) => (
-            <div
+            <article
               key={item.name}
-              className={`group relative flex min-h-[205px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/90 bg-gradient-to-br ${item.accent} p-6 shadow-[0_16px_48px_rgba(18,103,244,0.09)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_58px_rgba(18,103,244,0.15)]`}
+              className={`group relative flex min-h-[142px] items-center gap-4 overflow-hidden rounded-[23px] border border-blue-100/80 bg-gradient-to-br ${item.accent} px-5 py-5 shadow-[0_10px_35px_rgba(18,103,244,0.09)] ring-1 ring-white/75 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_45px_rgba(18,103,244,0.16)] sm:px-6`}
             >
-              <span aria-hidden="true" className="absolute -right-8 -top-9 h-36 w-36 rounded-full border-[24px] border-white/40" />
-              <div className="relative flex items-center justify-between gap-3">
-                <span className="rounded-full border border-blue-100/80 bg-white/80 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.13em] text-blue-700">
-                  Coming Soon
-                </span>
-                <span className="text-xs font-bold text-slate-400">0{index + 1}</span>
+              <span aria-hidden="true" className="absolute inset-x-7 top-0 h-[2px] bg-gradient-to-r from-blue-500 via-cyan-300 to-transparent" />
+              <span aria-hidden="true" className="absolute -right-12 -bottom-16 h-40 w-40 rounded-full border-[28px] border-white/55" />
+
+              <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-white/90 bg-white/80 text-blue-600 shadow-[0_8px_24px_rgba(18,103,244,0.10)] backdrop-blur-xl">
+                <Sparkles size={22} />
+              </span>
+
+              <div className="relative min-w-0 flex-1">
+                <p className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-600">Coming Soon · 0{index + 1}</p>
+                <h3 className="mt-1.5 text-[1.05rem] font-extrabold leading-snug tracking-tight text-[#071a45]">{item.name}</h3>
+                <p className="mt-1 text-xs leading-5 text-slate-600">{item.detail}</p>
               </div>
-              <div className="relative mt-7">
-                <h3 className="text-xl font-extrabold leading-tight text-[#071a45]">{item.name}</h3>
-                <p className="mt-2 text-sm text-slate-600">{item.detail}</p>
-              </div>
-            </div>
+            </article>
           ))}
         </div>
       </motion.section>
