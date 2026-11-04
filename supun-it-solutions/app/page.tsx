@@ -9,10 +9,10 @@ import Contact from "@/app/contact/page";
 import { ScrollSection } from "@/src/components/scroll-section";
 
 const services = [
-  { icon: Layers3, title: "ERP & Enterprise Systems", text: "Finance, procurement, inventory and operational control built around real workflows." },
-  { icon: Code2, title: "Web Applications", text: "Fast, responsive portals and business platforms designed for everyday use." },
-  { icon: BriefcaseBusiness, title: "Business Systems", text: "Internal tools that simplify operations, feedback, reporting and management." },
-  { icon: ShoppingCart, title: "E-Commerce", text: "Digital selling, COD, fulfilment and entrepreneur-focused commerce experiences." },
+  { icon: Layers3, title: "ERP & Enterprise Systems", text: "Finance, procurement, inventory and operational control built around real workflows.", card: "from-blue-50/90 via-white to-cyan-50/80 border-blue-200", iconStyle: "from-blue-600 to-cyan-400", glow: "bg-blue-300/25" },
+  { icon: Code2, title: "Web Applications", text: "Fast, responsive portals and business platforms designed for everyday use.", card: "from-cyan-50/90 via-white to-sky-50/80 border-cyan-200", iconStyle: "from-cyan-500 to-sky-600", glow: "bg-cyan-300/25" },
+  { icon: BriefcaseBusiness, title: "Business Systems", text: "Internal tools that simplify operations, feedback, reporting and management.", card: "from-violet-50/90 via-white to-blue-50/80 border-violet-200", iconStyle: "from-violet-600 to-blue-500", glow: "bg-violet-300/25" },
+  { icon: ShoppingCart, title: "E-Commerce", text: "Digital selling, COD, fulfilment and entrepreneur-focused commerce experiences.", card: "from-orange-50/90 via-white to-amber-50/80 border-orange-200", iconStyle: "from-orange-500 to-amber-400", glow: "bg-orange-300/25" },
 ] as const;
 
 export default function Home() {
@@ -63,11 +63,12 @@ export default function Home() {
         </div>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {services.map(({ icon: Icon, title, text }, index) => (
-            <Reveal key={title} delay={index * 0.09} className="group relative flex min-h-[300px] flex-col items-center justify-center overflow-hidden rounded-[26px] border border-blue-100/90 bg-gradient-to-b from-white via-white to-blue-50/75 p-8 text-center shadow-[0_16px_45px_rgba(37,99,235,0.09)] backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-cyan-200 hover:shadow-[0_28px_65px_rgba(37,99,235,0.18)]">
-              <span aria-hidden="true" className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-cyan-300/0 blur-3xl transition duration-500 group-hover:bg-cyan-300/25" />
+          {services.map(({ icon: Icon, title, text, card, iconStyle, glow }, index) => (
+            <Reveal key={title} delay={index * 0.09} className={`group relative flex min-h-[300px] flex-col items-center justify-center overflow-hidden rounded-[26px] border bg-gradient-to-br ${card} p-8 text-center shadow-[0_16px_45px_rgba(37,99,235,0.10)] backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:shadow-[0_28px_65px_rgba(37,99,235,0.20)]`}>
+              <span aria-hidden="true" className={`absolute -right-12 -top-12 h-44 w-44 rounded-full ${glow} blur-3xl transition duration-500 group-hover:scale-125 group-hover:opacity-90`} />
+              <span aria-hidden="true" className={`absolute -bottom-20 -left-16 h-44 w-44 rounded-full ${glow} opacity-40 blur-3xl`} />
               <span aria-hidden="true" className="absolute inset-x-12 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-500/45 to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
-              <div className="relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600 shadow-[0_10px_25px_rgba(18,103,244,.10)] transition duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg] group-hover:bg-gradient-to-br group-hover:from-blue-600 group-hover:to-cyan-400 group-hover:text-white"><Icon size={24} /></div>
+              <div className={`relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${iconStyle} text-white shadow-[0_12px_28px_rgba(18,103,244,.18)] transition duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg] group-hover:scale-110`}><Icon size={24} /></div>
               <h3 className="relative mt-6 text-xl font-extrabold leading-8 text-slate-950">{title}</h3>
               <p className="relative mt-4 max-w-[270px] text-sm leading-7 text-slate-600">{text}</p>
               <ArrowUpRight className="absolute right-5 top-5 h-4 w-4 text-blue-300 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-blue-600" />

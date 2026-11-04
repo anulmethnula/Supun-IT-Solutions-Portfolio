@@ -5,8 +5,8 @@ import Image from "next/image";
 import { Maximize, Pause, Play, Volume2, VolumeX } from "lucide-react";
 
 const defaultSources = [
-  "/videos/hero-showreel.mp4",
   "/videos/hero-video.mp4",
+  "/videos/hero-showreel.mp4",
   "/hero-video.mp4",
   "/hero video.mp4",
   "/videos/hero-showreel.webm",
@@ -44,7 +44,7 @@ export function VideoPlayer({
   };
 
   return (
-    <div className="group relative aspect-[16/10] overflow-hidden rounded-[30px] border border-white/80 bg-slate-950 shadow-[0_35px_90px_rgba(37,99,235,0.24)]">
+    <div className="group relative aspect-video overflow-hidden rounded-[32px] border border-white/80 bg-slate-950 shadow-[0_35px_90px_rgba(37,99,235,0.24)]">
       <Image src="/images/projects/supun-group/supun-group.png" alt="Supun IT Solutions digital work preview" fill priority sizes="(max-width: 1024px) 100vw, 58vw" className="object-cover opacity-80" />
 
       {currentSource && (
