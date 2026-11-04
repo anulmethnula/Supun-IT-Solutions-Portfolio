@@ -12,6 +12,8 @@ const fallbackTone: Record<Project["tone"], string> = {
   corporate: "from-[#091a38] via-[#1658b9] to-[#4bc6e8]",
   feedback: "from-[#12367e] via-[#258bd6] to-[#7ed6ee]",
   aerosoft: "from-[#09142f] via-[#2456c7] to-[#6f8fee]",
+  costing: "from-[#082e2b] via-[#167968] to-[#d1ac5b]",
+  acservice: "from-[#432017] via-[#c25b2c] to-[#f1b66f]",
 };
 
 export function ProjectCover({ project, priority = false, className = "" }: { project: Project; priority?: boolean; className?: string }) {
