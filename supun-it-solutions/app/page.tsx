@@ -77,7 +77,7 @@ export default function Home() {
         </div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-          {services.map(({ icon: Icon, title, text }, index) => (
+          {services.map(({ icon: Icon, title, text }) => (
             <Reveal key={title} className="group relative rounded-[24px] border border-blue-100 bg-white/80 p-6 shadow-[0_14px_45px_rgba(37,99,235,0.08)] backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-[0_22px_55px_rgba(37,99,235,0.14)]">
               <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-blue-600"><Icon size={22} /></div>
               <h3 className="mt-5 text-lg font-extrabold text-slate-950">{title}</h3>
