@@ -1,8 +1,6 @@
 import { ArrowUpRight, BriefcaseBusiness, Code2, Layers3, ShoppingCart, Smartphone } from "lucide-react";
-import { projects } from "@/src/data/projects";
 import { Marquee, PrimaryButton, Reveal, SecondaryButton } from "@/src/components/ui";
 import { VideoPlayer } from "@/src/components/video-player";
-import { ProjectCard } from "@/src/components/project-card";
 import AboutPage from "@/app/about/page";
 import Projects from "@/app/projects/page";
 import Team from "@/app/team/page";
@@ -20,8 +18,6 @@ const services = [
 const systems = ["Enterprise ERP Systems", "CAMY Entrepreneurs Digital Platform", "Supun Group Website Redesign", "Guest Feedback Management System", "AeroSoft360 ERP"];
 
 export default function Home() {
-  const featured = projects.filter((project) => project.featured).slice(0, 3);
-
   return (
     <div className="overflow-hidden bg-white">
       <div id="home" className="portfolio-section">
@@ -88,22 +84,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative border-y border-blue-100 bg-gradient-to-b from-blue-50/60 via-white to-white py-20 lg:py-24">
-        <div className="mx-auto max-w-[1500px] px-5 sm:px-8 lg:px-10">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-            <div className="max-w-3xl">
-              <div className="text-xs font-black uppercase tracking-[0.2em] text-blue-600">Featured Work</div>
-              <h2 className="mt-4 text-4xl font-extrabold tracking-[-0.045em] text-slate-950 sm:text-5xl">Systems already solving real business problems.</h2>
-              <p className="mt-4 text-base leading-7 text-slate-600">Selected work across enterprise operations, digital commerce and corporate web experiences.</p>
-            </div>
-            <PrimaryButton href="/#projects">Explore all projects</PrimaryButton>
-          </div>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {featured.map((project, index) => <ProjectCard project={project} key={project.id} index={index} />)}
-          </div>
-        </div>
-      </section>
       </div>
 
       <div id="about" className="portfolio-section"><AboutPage /></div>
