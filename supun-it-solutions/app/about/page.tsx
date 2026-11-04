@@ -182,7 +182,7 @@ export default function AboutPage() {
                 initial={false}
                 whileHover={{ y: -7 }}
                 transition={{ duration: 0.25 }}
-                className="group relative min-h-64 overflow-hidden rounded-[1.75rem] border border-[#1267F4]/12 bg-white/72 p-7 shadow-[0_20px_55px_rgba(25,82,145,.09)] backdrop-blur-xl"
+                className="group relative flex min-h-64 flex-col items-center justify-center overflow-hidden rounded-[1.75rem] border border-[#1267F4]/12 bg-white/72 p-7 text-center shadow-[0_20px_55px_rgba(25,82,145,.09)] backdrop-blur-xl"
               >
                 <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[#00A7FF]/10 blur-2xl transition group-hover:bg-[#00A7FF]/18" />
                 <div className="relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-[#1267F4] to-[#00A7FF] text-white shadow-[0_12px_28px_rgba(18,103,244,.24)]">
