@@ -19,6 +19,8 @@ export type Project = {
   workflow?: string;
   featured?: boolean;
   sensitive?: boolean;
+  liveUrl?: string;
+  liveLabel?: string;
   tone: "erp" | "camy" | "corporate" | "feedback" | "aerosoft" | "costing" | "acservice";
 };
 
@@ -56,6 +58,8 @@ export const projects: Project[] = [
   },
   {
     id: "camy-entrepreneurs",
+    liveUrl: "https://camymarket.com/",
+    liveLabel: "Visit CAMY Market",
     title: "CAMY Entrepreneurs Digital Platform",
     description: "A complete entrepreneur operations platform connecting product selling, COD orders, stock reservations, courier fulfilment, entrepreneur profit, payouts and credit-stock workflows.",
     category: "Business Systems",
@@ -88,6 +92,8 @@ export const projects: Project[] = [
   },
   {
     id: "supun-group-redesign",
+    liveUrl: "https://supuncompanies.com/",
+    liveLabel: "Visit Supun Group Website",
     title: "Supun Group Website Redesign",
     description: "A full redesign of the Supun Group corporate website, creating a modern digital experience for the group's businesses, brands and company information.",
     category: "Web Applications",
