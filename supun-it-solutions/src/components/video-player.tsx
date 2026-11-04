@@ -15,74 +15,42 @@ const defaultSources = [
 
 export function CinematicHeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
-  const autoStartAttempted = useRef(false);
-  const [ready, setReady] = useState(false);
-  const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
   const reduceMotion = useReducedMotion();
 
   const attemptPlayback = useCallback(() => {
-    if (!ref.current || autoStartAttempted.current) return;
+    if (!ref.current) return;
     const video = ref.current;
     video.muted = true;
     video.defaultMuted = true;
-    autoStartAttempted.current = true;
-    void video.play().catch(() => {
-      autoStartAttempted.current = false;
-      setPlaying(false);
-    });
+    void video.play().catch(() => undefined);
   }, []);
 
   useEffect(() => {
-    if (ready) attemptPlayback();
-  }, [attemptPlayback, ready]);
-
-  const startPlayback = () => {
-    setReady(true);
     attemptPlayback();
-  };
-
-  const toggle = async () => {
-    if (!ref.current || !ready) return;
-    if (playing) {
-      ref.current.pause();
-      return;
-    }
-    try {
-      await ref.current.play();
-    } catch {
-      setPlaying(false);
-    }
-  };
+  }, [attemptPlayback]);
 
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#04122f]">
-      <Image src="/images/about/area56-day.png" alt="Supun Group venue" fill priority sizes="100vw" className="object-cover" />
       {!failed ? (
         <video
           ref={ref}
           src="/videos/hero-video.mp4"
-          poster="/images/about/area56-day.png"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}
-          onLoadedData={startPlayback}
-          onCanPlay={startPlayback}
-          onPlay={() => setPlaying(true)}
-          onPause={() => setPlaying(false)}
+          className="absolute inset-0 h-full w-full object-cover"
+          onLoadedMetadata={attemptPlayback}
+          onLoadedData={attemptPlayback}
+          onCanPlay={attemptPlayback}
           onError={() => setFailed(true)}
         />
       ) : null}
 
       <motion.div aria-hidden="true" className="pointer-events-none absolute -bottom-28 -left-[8%] h-48 w-[116%] rounded-[50%] bg-blue-500/18 blur-2xl" animate={reduceMotion ? undefined : { x: [0, 24, 0], scaleY: [1, 1.14, 1] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
       <motion.div aria-hidden="true" className="pointer-events-none absolute -bottom-36 -left-[12%] h-52 w-[124%] rounded-[50%] bg-cyan-400/18 blur-3xl" animate={reduceMotion ? undefined : { x: [0, -30, 0], scaleY: [1.08, 0.92, 1.08] }} transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }} />
-
-      <button type="button" onClick={toggle} disabled={!ready || failed} aria-label={playing ? "Pause background video" : "Play background video"} className="absolute bottom-6 right-5 z-30 grid h-12 w-12 place-items-center rounded-full border border-white/25 bg-slate-950/35 text-white shadow-xl backdrop-blur-xl transition hover:scale-105 hover:bg-white/15 disabled:opacity-45 sm:bottom-8 sm:right-8">
-        {playing ? <Pause size={19} /> : <Play size={19} className="translate-x-px" />}
-      </button>
     </div>
   );
 }

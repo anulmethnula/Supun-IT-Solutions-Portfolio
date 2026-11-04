@@ -102,7 +102,7 @@ export function Navbar() {
   };
 
   return (
-    <header className={`nav nav-v2 ${manrope.variable}${scrolled ? " is-scrolled" : ""}`}>
+    <header className={`nav nav-v2 ${manrope.variable}${scrolled ? " is-scrolled" : ""}${path === "/" && !scrolled ? " is-home-hero" : ""}`}>
       <div className="nav-inner-v2">
         <Brand />
         <nav className="desktop-nav-v2" aria-label="Primary navigation">

@@ -20,12 +20,12 @@ export default function Home() {
   return (
     <div className="overflow-hidden bg-white">
       <div id="home" className="portfolio-section">
-        <section className="relative isolate flex min-h-[calc(100svh-88px)] items-center overflow-hidden bg-[#04122f]">
+        <section className="relative isolate flex min-h-screen items-center overflow-hidden bg-[#04122f] supports-[height:100svh]:min-h-[100svh]">
           <CinematicHeroVideo />
           <div aria-hidden="true" className="absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(3,13,39,.90)_0%,rgba(4,20,55,.72)_42%,rgba(4,20,55,.28)_70%,rgba(3,13,39,.12)_100%)]" />
           <div aria-hidden="true" className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_72%_42%,rgba(0,167,255,.12),transparent_38%)]" />
 
-          <div className="relative z-20 mx-auto w-full max-w-[1500px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+          <div className="relative z-20 mx-auto w-full max-w-[1500px] translate-y-14 px-5 py-20 sm:translate-y-16 sm:px-8 lg:translate-y-20 lg:px-10 lg:py-24">
             <Reveal className="max-w-[850px]">
               <h1 className="text-4xl font-extrabold leading-[1.06] tracking-[-0.045em] text-white sm:text-5xl lg:text-[3.9rem] xl:text-[4.3rem]">
                 Building digital systems that <span className="bg-gradient-to-r from-[#3B82F6] via-[#1597F5] to-[#35D8FF] bg-clip-text text-transparent">move the business forward.</span>
