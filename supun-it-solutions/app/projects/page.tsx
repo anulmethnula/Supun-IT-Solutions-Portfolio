@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -15,7 +15,7 @@ import {
   X,
 } from "lucide-react";
 import { projects, type Project } from "@/src/data/projects";
-import { ProjectCard, ProjectCover } from "@/src/components/project-card";
+import { ProjectCover } from "@/src/components/project-card";
 
 const filters = ["All Projects", "ERP Systems", "Web Applications", "Business Systems", "E-Commerce"] as const;
 
@@ -24,6 +24,45 @@ const comingSoonProjects = [
   { name: "WIP Project", detail: "Work in progress", accent: "from-violet-50 to-indigo-50" },
   { name: "AnythingAtSupun E-Commerce Platform Redesign", detail: "Online shopping platform redesign", accent: "from-orange-50 to-amber-50" },
 ] as const;
+
+const showcaseTone: Record<Project["tone"], { surface: string; glow: string }> = {
+  erp: { surface: "from-[#071a45] via-[#0c42a0] to-[#087fdf]", glow: "bg-cyan-300/45" },
+  camy: { surface: "from-[#071942] via-[#075ab1] to-[#00a7ff]", glow: "bg-sky-300/45" },
+  corporate: { surface: "from-[#08295e] via-[#086cce] to-[#08b7e8]", glow: "bg-blue-300/45" },
+  feedback: { surface: "from-[#063d3b] via-[#087b71] to-[#12b889]", glow: "bg-emerald-300/45" },
+  aerosoft: { surface: "from-[#07142f] via-[#283d92] to-[#087ecb]", glow: "bg-indigo-300/45" },
+  costing: { surface: "from-[#092c2b] via-[#17675c] to-[#b68a31]", glow: "bg-amber-300/45" },
+  acservice: { surface: "from-[#442016] via-[#ad4f27] to-[#ee9b42]", glow: "bg-orange-300/45" },
+};
+
+function ShowcaseProjectCard({ project, onOpen }: { project: Project; onOpen: (project: Project) => void }) {
+  const tone = showcaseTone[project.tone];
+
+  return (
+    <article className={`group relative flex h-full flex-col overflow-hidden rounded-[34px] border border-white/55 bg-gradient-to-br ${tone.surface} text-white shadow-[0_34px_90px_rgba(3,27,73,0.28)] ring-1 ring-white/25 backdrop-blur-xl`}>
+      <div className={`pointer-events-none absolute -bottom-20 left-1/2 h-36 w-4/5 -translate-x-1/2 rounded-full ${tone.glow} blur-3xl`} />
+      <div className="relative m-3 aspect-video overflow-hidden rounded-[25px] border border-white/25 bg-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,.35)]">
+        <ProjectCover project={project} priority />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#031638]/35 via-transparent to-white/5" />
+      </div>
+
+      <div className="relative flex min-h-0 flex-1 flex-col px-6 pb-6 pt-3 sm:px-7">
+        <span className="w-fit rounded-full border border-white/25 bg-white/14 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.14em] text-white backdrop-blur-xl">{project.category}</span>
+        <h2 className="mt-4 text-[1.55rem] font-extrabold leading-[1.06] tracking-[-0.04em] sm:text-[1.7rem]">{project.title}</h2>
+        <p className="mt-3 line-clamp-3 text-sm leading-6 text-white/80">{project.description}</p>
+
+        <div className="mt-auto flex items-end justify-between gap-4 pt-5">
+          <div className="flex min-w-0 flex-wrap gap-2">
+            {project.tags.slice(0, 3).map((tag) => <span key={tag} className="rounded-full border border-white/18 bg-white/12 px-3 py-1.5 text-[10px] font-bold text-white/90 backdrop-blur-xl">{tag}</span>)}
+          </div>
+          <button onClick={() => onOpen(project)} aria-label={`Explore ${project.title}`} className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-[#1267F4] shadow-[0_12px_28px_rgba(0,0,0,.22)] transition duration-300 group-hover:rotate-[-8deg] group-hover:scale-105">
+            <ArrowUpRight size={20} />
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+}
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   useEffect(() => {
@@ -174,43 +213,30 @@ export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
-  const carouselRef = useRef<HTMLDivElement>(null);
   const visible = useMemo(
     () => active === "All Projects" ? projects : projects.filter((project) => project.category === active || project.secondaryCategories?.includes(active)),
     [active]
   );
 
-  const goTo = useCallback((rawIndex: number) => {
+  const goTo = (rawIndex: number) => {
     if (!visible.length) return;
-    const nextIndex = (rawIndex + visible.length) % visible.length;
-    const carousel = carouselRef.current;
-    const card = carousel?.children[nextIndex] as HTMLElement | undefined;
-    setCurrent(nextIndex);
-    if (carousel && card) carousel.scrollTo({ left: card.offsetLeft, behavior: "smooth" });
-  }, [visible.length]);
+    setCurrent((rawIndex + visible.length) % visible.length);
+  };
 
   useEffect(() => {
     if (paused || visible.length < 2) return;
-    const timer = window.setInterval(() => goTo(current + 1), 4500);
+    const timer = window.setInterval(() => setCurrent((value) => (value + 1) % visible.length), 4800);
     return () => window.clearInterval(timer);
-  }, [current, goTo, paused, visible.length]);
+  }, [paused, visible.length]);
 
   const changeFilter = (filter: (typeof filters)[number]) => {
     setActive(filter);
     setCurrent(0);
-    carouselRef.current?.scrollTo({ left: 0, behavior: "smooth" });
   };
 
-  const syncCurrentSlide = () => {
-    const carousel = carouselRef.current;
-    if (!carousel?.children.length) return;
-    const nearest = Array.from(carousel.children).reduce((best, child, index) => (
-      Math.abs((child as HTMLElement).offsetLeft - carousel.scrollLeft) < best.distance
-        ? { index, distance: Math.abs((child as HTMLElement).offsetLeft - carousel.scrollLeft) }
-        : best
-    ), { index: 0, distance: Number.POSITIVE_INFINITY });
-    setCurrent(nearest.index);
-  };
+  const centerProject = visible[current % Math.max(visible.length, 1)];
+  const leftProject = visible.length > 2 ? visible[(current - 1 + visible.length) % visible.length] : undefined;
+  const rightProject = visible.length > 1 ? visible[(current + 1) % visible.length] : undefined;
 
   return (
     <main className="relative w-full max-w-full overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f4f9ff_54%,#ffffff_100%)] pb-20">
@@ -239,27 +265,59 @@ export default function Projects() {
       </section>
 
       <section className="relative mx-auto mt-10 w-full min-w-0 max-w-[1440px] px-5 sm:px-12 lg:px-16">
-        <button onClick={() => goTo(current - 1)} aria-label="Previous project" className="absolute left-1 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-blue-100 bg-white/90 text-[#071a45] shadow-[0_12px_32px_rgba(18,103,244,0.16)] backdrop-blur-xl transition hover:scale-105 hover:bg-blue-600 hover:text-white sm:left-2"><ChevronLeft size={24} /></button>
-        <button onClick={() => goTo(current + 1)} aria-label="Next project" className="absolute right-1 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-blue-100 bg-white/90 text-[#071a45] shadow-[0_12px_32px_rgba(18,103,244,0.16)] backdrop-blur-xl transition hover:scale-105 hover:bg-blue-600 hover:text-white sm:right-2"><ChevronRight size={24} /></button>
+        <button onClick={() => goTo(current - 1)} aria-label="Previous project" className="absolute left-1 top-[48%] z-30 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-blue-100 bg-white/90 text-[#071a45] shadow-[0_12px_32px_rgba(18,103,244,0.18)] backdrop-blur-xl transition hover:scale-105 hover:bg-blue-600 hover:text-white sm:left-2"><ChevronLeft size={24} /></button>
+        <button onClick={() => goTo(current + 1)} aria-label="Next project" className="absolute right-1 top-[48%] z-30 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-blue-100 bg-white/90 text-[#071a45] shadow-[0_12px_32px_rgba(18,103,244,0.18)] backdrop-blur-xl transition hover:scale-105 hover:bg-blue-600 hover:text-white sm:right-2"><ChevronRight size={24} /></button>
 
-        <motion.div
-          key={active}
-          ref={carouselRef}
+        <div
+          className="relative h-[590px] [perspective:1600px]"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
           onFocusCapture={() => setPaused(true)}
           onBlurCapture={() => setPaused(false)}
-          onScroll={syncCurrentSlide}
-          initial={false}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex w-full min-w-0 max-w-full snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-8 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {visible.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} onOpen={setSelected} className="snap-start shrink-0 basis-full md:basis-[calc((100%-1.5rem)/2)] xl:basis-[calc((100%-3rem)/3)]" />
-          ))}
-        </motion.div>
+          <div aria-hidden="true" className="absolute inset-x-[10%] bottom-8 h-20 rounded-[50%] bg-blue-500/15 blur-3xl" />
 
-        <div className="mt-1 flex justify-center gap-2" aria-label="Project carousel pagination">
+          <div className="hidden h-full lg:block">
+            <AnimatePresence initial={false}>
+              {[
+                leftProject && { project: leftProject, position: "left" as const },
+                centerProject && { project: centerProject, position: "center" as const },
+                rightProject && { project: rightProject, position: "right" as const },
+              ].filter((slot): slot is { project: Project; position: "left" | "center" | "right" } => Boolean(slot)).map(({ project, position }) => {
+                const isCenter = position === "center";
+                const x = position === "left" ? "-132%" : position === "right" ? "32%" : "-50%";
+                const rotateY = position === "left" ? 8 : position === "right" ? -8 : 0;
+                const scale = isCenter ? 1 : 0.91;
+                const y = isCenter ? 0 : 24;
+                return (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, x: position === "left" ? "-155%" : "55%", scale: 0.84, y: 38 }}
+                    animate={{ opacity: 1, x, rotateY, scale, y }}
+                    exit={{ opacity: 0, scale: 0.82, y: 44 }}
+                    whileHover={{ y: y - 8, scale: scale + 0.015 }}
+                    transition={{ type: "spring", stiffness: 170, damping: 24, mass: 0.85 }}
+                    className={`absolute left-1/2 top-0 h-[555px] w-[36%] ${isCenter ? "z-20" : "z-10"}`}
+                  >
+                    <ShowcaseProjectCard project={project} onOpen={setSelected} />
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+
+          <div className="h-[555px] lg:hidden">
+            <AnimatePresence mode="wait" initial={false}>
+              {centerProject && (
+                <motion.div key={centerProject.id} initial={{ opacity: 0, x: 45, scale: 0.96 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: -45, scale: 0.96 }} transition={{ duration: 0.38, ease: "easeOut" }} className="h-full">
+                  <ShowcaseProjectCard project={centerProject} onOpen={setSelected} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        <div className="mt-2 flex justify-center gap-2" aria-label="Project carousel pagination">
           {visible.map((project, index) => (
             <button key={project.id} onClick={() => goTo(index)} aria-label={`Go to ${project.title}`} className={`h-2.5 rounded-full transition-all duration-300 ${current === index ? "w-7 bg-gradient-to-r from-[#1267F4] to-[#00A7FF]" : "w-2.5 bg-blue-200 hover:bg-blue-400"}`} />
           ))}
