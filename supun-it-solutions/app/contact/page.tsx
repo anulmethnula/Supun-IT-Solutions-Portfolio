@@ -1,7 +1,6 @@
 "use client";
 
 import type { FormEvent } from "react";
-import Image from "next/image";
 import { ArrowUpRight, Mail, MessageSquareText, Send, Tag, UserRound, UsersRound } from "lucide-react";
 import { siteConfig } from "@/src/data/site";
 
@@ -24,7 +23,7 @@ export default function Contact() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-[radial-gradient(120%_100%_at_50%_100%,rgba(18,103,244,.22),rgba(0,167,255,.08)_48%,transparent_49%)]" />
 
       <section className="relative mx-auto grid max-w-[1440px] items-start gap-8 lg:grid-cols-[0.4fr_0.6fr] lg:gap-12">
-        <div className="relative min-w-0">
+        <div className="relative min-w-0 lg:flex lg:min-h-[650px] lg:flex-col lg:justify-center">
           <div className="inline-flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.22em] text-[#1267F4]">
             <span>Contact us</span><i className="h-px w-12 bg-gradient-to-r from-[#1267F4] to-[#00A7FF]" />
           </div>
@@ -33,7 +32,7 @@ export default function Contact() {
           </h1>
           <p className="mt-5 max-w-xl text-base leading-7 text-slate-600">For general inquiries about Supun IT Solutions and our work within the Supun Group of Companies, feel free to contact us.</p>
 
-          <div className="mt-6 space-y-3">
+          <div className="mt-8 space-y-4">
             <a href={`mailto:${siteConfig.email}`} className="group flex items-center gap-4 rounded-[22px] border border-white/90 bg-white/75 p-4 shadow-[0_14px_36px_rgba(18,103,244,0.09)] backdrop-blur-xl transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_42px_rgba(18,103,244,0.15)]">
               <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-blue-50 text-[#1267F4]"><Mail size={21} /></span>
               <span className="min-w-0 flex-1"><span className="block text-[10px] font-extrabold uppercase tracking-[0.18em] text-slate-400">Email us</span><span className="mt-1 block truncate font-extrabold text-[#071A45]">{siteConfig.email}</span></span>
@@ -46,11 +45,6 @@ export default function Contact() {
             </a>
           </div>
 
-          <div className="relative mt-5 h-64 overflow-hidden rounded-[28px] border border-white/80 shadow-[0_20px_55px_rgba(18,103,244,0.15)] sm:h-72">
-            <Image src="/images/projects/covers/supun-group.png" alt="Supun Arcade building" fill priority sizes="(max-width: 1024px) 100vw, 40vw" className="origin-right scale-[2.25] object-cover object-right" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1267F4]/22 via-transparent to-white/5" />
-            <div aria-hidden="true" className="absolute -bottom-20 -left-12 h-36 w-[125%] rotate-[-4deg] rounded-[50%] bg-gradient-to-r from-[#1267F4]/80 to-[#00A7FF]/70 blur-[1px]" />
-          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-[32px] border border-white/85 bg-white/68 p-6 shadow-[0_28px_85px_rgba(18,103,244,0.13)] backdrop-blur-xl sm:p-8 lg:p-10">
