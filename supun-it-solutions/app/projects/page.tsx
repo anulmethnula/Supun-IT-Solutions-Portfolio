@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowUpRight,
   Building2,
   Check,
+  ChevronLeft,
+  ChevronRight,
   Cpu,
-  Layers3,
   Sparkles,
   Target,
   Workflow,
@@ -86,22 +87,24 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
               <p className="mt-3 max-w-3xl text-[1.02rem] leading-8 text-slate-600">{project.description}</p>
             </div>
 
-            <div className="divide-y divide-slate-100">
-              <section className="grid gap-4 py-7 sm:grid-cols-[150px_1fr]">
-                <div className="flex items-center gap-2 font-extrabold text-[#071a45]"><Target size={18} className="text-blue-600" /> Challenge</div>
-                <p className="leading-7 text-slate-600">{project.businessProblem}</p>
-              </section>
-              <section className="grid gap-4 py-7 sm:grid-cols-[150px_1fr]">
-                <div className="flex items-center gap-2 font-extrabold text-[#071a45]"><Sparkles size={18} className="text-cyan-500" /> Solution</div>
-                <p className="leading-7 text-slate-600">{project.solution}</p>
-              </section>
-              <section className="grid gap-4 py-7 sm:grid-cols-[150px_1fr]">
-                <div className="flex items-center gap-2 font-extrabold text-[#071a45]"><ArrowUpRight size={18} className="text-blue-600" /> Impact</div>
-                <p className="leading-7 text-slate-600">{project.impact}</p>
-              </section>
-            </div>
+            {!project.sensitive && (
+              <div className="divide-y divide-slate-100">
+                <section className="grid gap-4 py-7 sm:grid-cols-[150px_1fr]">
+                  <div className="flex items-center gap-2 font-extrabold text-[#071a45]"><Target size={18} className="text-blue-600" /> Challenge</div>
+                  <p className="leading-7 text-slate-600">{project.businessProblem}</p>
+                </section>
+                <section className="grid gap-4 py-7 sm:grid-cols-[150px_1fr]">
+                  <div className="flex items-center gap-2 font-extrabold text-[#071a45]"><Sparkles size={18} className="text-cyan-500" /> Solution</div>
+                  <p className="leading-7 text-slate-600">{project.solution}</p>
+                </section>
+                <section className="grid gap-4 py-7 sm:grid-cols-[150px_1fr]">
+                  <div className="flex items-center gap-2 font-extrabold text-[#071a45]"><ArrowUpRight size={18} className="text-blue-600" /> Impact</div>
+                  <p className="leading-7 text-slate-600">{project.impact}</p>
+                </section>
+              </div>
+            )}
 
-            {project.workflow && (
+            {!project.sensitive && project.workflow && (
               <section className="relative overflow-hidden rounded-[26px] border border-blue-100 bg-gradient-to-br from-[#071a45] via-[#0e377d] to-[#0d8fd4] p-6 text-white shadow-[0_20px_55px_rgba(18,103,244,0.18)] sm:p-7">
                 <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full border border-white/15" />
                 <div className="relative flex items-start gap-4">
@@ -136,14 +139,14 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                   </div>
                 )}
 
-                <div>
+                {!project.sensitive && <div>
                   <div className="flex items-center gap-2 text-sm font-extrabold text-[#071a45]"><Cpu size={17} className="text-blue-600" /> Technology</div>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {project.technologies.map((technology) => (
                       <span key={technology} className="rounded-full border border-slate-200 bg-white/90 px-3 py-1.5 text-[11px] font-bold text-slate-600">{technology}</span>
                     ))}
                   </div>
-                </div>
+                </div>}
 
                 <div>
                   <p className="text-sm font-extrabold text-[#071a45]">Key Features</p>
@@ -169,55 +172,98 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 export default function Projects() {
   const [active, setActive] = useState<(typeof filters)[number]>("All Projects");
   const [selected, setSelected] = useState<Project | null>(null);
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const visible = useMemo(
     () => active === "All Projects" ? projects : projects.filter((project) => project.category === active || project.secondaryCategories?.includes(active)),
     [active]
   );
 
+  const goTo = useCallback((rawIndex: number) => {
+    if (!visible.length) return;
+    const nextIndex = (rawIndex + visible.length) % visible.length;
+    const carousel = carouselRef.current;
+    const card = carousel?.children[nextIndex] as HTMLElement | undefined;
+    setCurrent(nextIndex);
+    if (carousel && card) carousel.scrollTo({ left: card.offsetLeft, behavior: "smooth" });
+  }, [visible.length]);
+
+  useEffect(() => {
+    if (paused || visible.length < 2) return;
+    const timer = window.setInterval(() => goTo(current + 1), 4500);
+    return () => window.clearInterval(timer);
+  }, [current, goTo, paused, visible.length]);
+
+  const changeFilter = (filter: (typeof filters)[number]) => {
+    setActive(filter);
+    setCurrent(0);
+    carouselRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+  };
+
+  const syncCurrentSlide = () => {
+    const carousel = carouselRef.current;
+    if (!carousel?.children.length) return;
+    const nearest = Array.from(carousel.children).reduce((best, child, index) => (
+      Math.abs((child as HTMLElement).offsetLeft - carousel.scrollLeft) < best.distance
+        ? { index, distance: Math.abs((child as HTMLElement).offsetLeft - carousel.scrollLeft) }
+        : best
+    ), { index: 0, distance: Number.POSITIVE_INFINITY });
+    setCurrent(nearest.index);
+  };
+
   return (
-    <main className="relative overflow-hidden bg-white pb-20">
-      <div aria-hidden="true" className="pointer-events-none absolute -left-24 top-36 h-80 w-80 rounded-full bg-blue-300/12 blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute -right-24 top-80 h-96 w-96 rounded-full bg-cyan-300/14 blur-3xl" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_70%_10%,rgba(15,165,255,.08),transparent_34%),radial-gradient(circle_at_25%_20%,rgba(18,103,244,.08),transparent_30%)]" />
+    <main className="relative overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f4f9ff_54%,#ffffff_100%)] pb-20">
+      <div aria-hidden="true" className="pointer-events-none absolute -left-32 top-40 h-[30rem] w-[30rem] rounded-full bg-blue-300/14 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-32 top-60 h-[34rem] w-[34rem] rounded-full bg-cyan-300/14 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[46rem] bg-[radial-gradient(circle_at_50%_10%,rgba(18,103,244,.08),transparent_42%)]" />
 
-      <section className="relative mx-auto max-w-[1320px] px-5 pb-10 pt-16 sm:px-8 lg:px-10 lg:pb-12 lg:pt-20">
-        <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }} className="relative grid gap-8 overflow-hidden rounded-[34px] border border-white/80 bg-white/58 p-7 shadow-[0_28px_90px_rgba(18,103,244,0.11)] backdrop-blur-2xl sm:p-10 lg:grid-cols-[1fr_auto] lg:items-end lg:p-12">
-          <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-28 h-72 w-72 rounded-full border-[42px] border-blue-400/10" />
-          <div aria-hidden="true" className="pointer-events-none absolute bottom-0 right-1/4 h-40 w-80 rounded-full bg-cyan-300/15 blur-3xl" />
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em] text-blue-600"><span>Our Projects</span><i className="h-px w-10 bg-gradient-to-r from-blue-600 to-cyan-400" /></div>
-            <h1 className="mt-4 text-4xl font-extrabold tracking-[-0.05em] text-[#071a45] sm:text-5xl lg:text-6xl">Project <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">Portfolio</span></h1>
-            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-500 sm:text-lg">ERP systems, web applications and digital business platforms built around real operational needs.</p>
-          </div>
-
-          <div className="relative hidden items-center gap-3 rounded-2xl border border-white/90 bg-white/68 px-5 py-4 text-sm font-bold text-slate-500 shadow-[0_12px_35px_rgba(18,103,244,0.09)] backdrop-blur-xl lg:flex">
-            <Layers3 size={18} className="text-blue-600" />
-            <span>{projects.length} selected projects</span>
-          </div>
+      <section className="relative mx-auto max-w-[1440px] px-5 pb-8 pt-16 text-center sm:px-8 lg:px-10 lg:pt-20">
+        <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <div className="inline-flex items-center gap-4 text-xs font-black uppercase tracking-[0.22em] text-blue-600"><i className="h-px w-12 bg-blue-400" /><span>Our Projects</span><i className="h-px w-12 bg-blue-400" /></div>
+          <h1 className="mt-4 text-4xl font-extrabold tracking-[-0.055em] text-[#071a45] sm:text-5xl lg:text-6xl">Featured <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">Projects</span></h1>
+          <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">A showcase of key solutions, from corporate websites to business systems and digital platforms.</p>
         </motion.div>
       </section>
 
-      <section className="relative mx-auto max-w-[1320px] px-5 sm:px-8 lg:px-10">
-        <div className="flex w-full min-w-0 max-w-full flex-col gap-4 overflow-hidden rounded-[24px] border border-white/90 bg-white/72 p-3 shadow-[0_18px_60px_rgba(18,103,244,0.09)] backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex w-full min-w-0 gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
+      <section className="relative mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-10">
+        <div className="overflow-hidden rounded-[26px] border border-white/90 bg-white/72 p-2.5 shadow-[0_18px_55px_rgba(18,103,244,0.09)] backdrop-blur-xl">
+          <div className="flex min-w-0 gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {filters.map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActive(filter)}
-                className={`whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-extrabold transition-all duration-300 ${active === filter ? "bg-gradient-to-r from-[#1267F4] to-[#00A7FF] text-white shadow-[0_10px_24px_rgba(18,103,244,0.22)]" : "border border-slate-200/80 bg-white/80 text-slate-500 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"}`}
-              >
+              <button key={filter} onClick={() => changeFilter(filter)} className={`relative shrink-0 whitespace-nowrap rounded-full px-5 py-3 text-sm font-extrabold transition-all duration-300 sm:flex-1 ${active === filter ? "bg-gradient-to-r from-[#1267F4] to-[#00A7FF] text-white shadow-[0_10px_26px_rgba(18,103,244,0.25)]" : "border border-slate-200/70 bg-white/72 text-slate-600 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"}`}>
                 {filter}
               </button>
             ))}
           </div>
-          <span className="shrink-0 px-2 text-sm font-bold text-slate-400">{visible.length} project{visible.length === 1 ? "" : "s"}</span>
         </div>
       </section>
 
-      <section className="relative mx-auto mt-9 grid max-w-[1320px] gap-7 px-5 sm:px-8 md:grid-cols-2 lg:gap-8 lg:px-10">
-        <AnimatePresence mode="popLayout">
-          {visible.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onOpen={setSelected} />)}
-        </AnimatePresence>
+      <section className="relative mx-auto mt-10 max-w-[1440px] px-5 sm:px-12 lg:px-16">
+        <button onClick={() => goTo(current - 1)} aria-label="Previous project" className="absolute left-1 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-blue-100 bg-white/90 text-[#071a45] shadow-[0_12px_32px_rgba(18,103,244,0.16)] backdrop-blur-xl transition hover:scale-105 hover:bg-blue-600 hover:text-white sm:left-2"><ChevronLeft size={24} /></button>
+        <button onClick={() => goTo(current + 1)} aria-label="Next project" className="absolute right-1 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-blue-100 bg-white/90 text-[#071a45] shadow-[0_12px_32px_rgba(18,103,244,0.16)] backdrop-blur-xl transition hover:scale-105 hover:bg-blue-600 hover:text-white sm:right-2"><ChevronRight size={24} /></button>
+
+        <motion.div
+          key={active}
+          ref={carouselRef}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={() => setPaused(false)}
+          onScroll={syncCurrentSlide}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-1 pb-8 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {visible.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} onOpen={setSelected} className="snap-start shrink-0 basis-full md:basis-[calc((100%-1.5rem)/2)] xl:basis-[calc((100%-3rem)/3)]" />
+          ))}
+        </motion.div>
+
+        <div className="mt-1 flex justify-center gap-2" aria-label="Project carousel pagination">
+          {visible.map((project, index) => (
+            <button key={project.id} onClick={() => goTo(index)} aria-label={`Go to ${project.title}`} className={`h-2.5 rounded-full transition-all duration-300 ${current === index ? "w-7 bg-gradient-to-r from-[#1267F4] to-[#00A7FF]" : "w-2.5 bg-blue-200 hover:bg-blue-400"}`} />
+          ))}
+        </div>
       </section>
 
       <motion.section
@@ -226,15 +272,15 @@ export default function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
       >
-        <div className="mb-6 flex items-center gap-3">
-          <Sparkles className="text-blue-600" size={23} />
-          <h2 className="text-2xl font-extrabold tracking-tight text-[#071a45] sm:text-3xl">Coming Soon</h2>
+        <div className="mb-7 text-center">
+          <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-blue-600"><Sparkles size={17} /><span>Coming Soon</span></div>
+          <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-[#071a45] sm:text-3xl">What we&apos;re building next</h2>
         </div>
         <div className="grid gap-5 md:grid-cols-3">
           {comingSoonProjects.map((item, index) => (
             <div
               key={item.name}
-              className={`group relative flex min-h-[190px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/90 bg-gradient-to-br ${item.accent} p-6 shadow-[0_16px_48px_rgba(18,103,244,0.09)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_58px_rgba(18,103,244,0.15)]`}
+              className={`group relative flex min-h-[205px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/90 bg-gradient-to-br ${item.accent} p-6 shadow-[0_16px_48px_rgba(18,103,244,0.09)] backdrop-blur-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_58px_rgba(18,103,244,0.15)]`}
             >
               <span aria-hidden="true" className="absolute -right-8 -top-9 h-36 w-36 rounded-full border-[24px] border-white/40" />
               <div className="relative flex items-center justify-between gap-3">

@@ -16,6 +16,16 @@ const fallbackTone: Record<Project["tone"], string> = {
   acservice: "from-[#432017] via-[#c25b2c] to-[#f1b66f]",
 };
 
+const toneGlow: Record<Project["tone"], string> = {
+  erp: "hover:border-blue-300/80 hover:shadow-[0_30px_85px_rgba(18,103,244,0.22)]",
+  camy: "hover:border-cyan-300/80 hover:shadow-[0_30px_85px_rgba(0,167,255,0.22)]",
+  corporate: "hover:border-sky-300/80 hover:shadow-[0_30px_85px_rgba(14,116,214,0.2)]",
+  feedback: "hover:border-emerald-300/80 hover:shadow-[0_30px_85px_rgba(16,185,129,0.2)]",
+  aerosoft: "hover:border-indigo-300/80 hover:shadow-[0_30px_85px_rgba(99,102,241,0.2)]",
+  costing: "hover:border-amber-300/80 hover:shadow-[0_30px_85px_rgba(217,160,35,0.2)]",
+  acservice: "hover:border-orange-300/80 hover:shadow-[0_30px_85px_rgba(234,88,12,0.2)]",
+};
+
 export function ProjectCover({ project, priority = false, className = "" }: { project: Project; priority?: boolean; className?: string }) {
   const candidates = useMemo(() => {
     const list = [...(project.imageCandidates ?? []), ...(project.image ? [project.image] : [])];
@@ -52,7 +62,7 @@ export function ProjectCover({ project, priority = false, className = "" }: { pr
   );
 }
 
-export function ProjectCard({ project, onOpen, index = 0 }: { project: Project; onOpen?: (project: Project) => void; index?: number }) {
+export function ProjectCard({ project, onOpen, index = 0, className = "" }: { project: Project; onOpen?: (project: Project) => void; index?: number; className?: string }) {
   return (
     <motion.article
       layout
@@ -60,8 +70,9 @@ export function ProjectCard({ project, onOpen, index = 0 }: { project: Project; 
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 12 }}
       transition={{ duration: 0.45, delay: index * 0.045 }}
-      whileHover={{ y: -8 }}
-      className="group relative flex h-full min-h-[500px] w-full min-w-0 max-w-full flex-col overflow-hidden rounded-[32px] border border-white/75 bg-white/60 shadow-[0_22px_70px_rgba(30,80,150,0.11)] backdrop-blur-2xl transition-all duration-500 hover:border-cyan-200/80 hover:bg-white/76 hover:shadow-[0_34px_100px_rgba(18,103,244,0.2)]"
+      whileHover={{ y: -9, rotateX: 1.2, rotateY: index % 2 === 0 ? 1.2 : -1.2 }}
+      style={{ transformPerspective: 1200 }}
+      className={`group relative flex h-full min-h-[480px] w-full min-w-0 max-w-full flex-col overflow-hidden rounded-[32px] border border-white/75 bg-white/64 shadow-[0_22px_70px_rgba(30,80,150,0.11)] backdrop-blur-2xl transition-[border-color,background-color,box-shadow] duration-500 hover:bg-white/80 ${toneGlow[project.tone]} ${className}`}
     >
       <div className="pointer-events-none absolute -right-16 -top-16 z-10 h-40 w-40 rounded-full bg-cyan-300/20 blur-3xl transition duration-700 group-hover:scale-125 group-hover:bg-blue-400/25" />
       <div className="pointer-events-none absolute inset-x-10 top-0 z-20 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50 transition-opacity duration-500 group-hover:opacity-100" />

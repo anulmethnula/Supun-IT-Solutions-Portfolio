@@ -18,6 +18,7 @@ export type Project = {
   companies?: string[];
   workflow?: string;
   featured?: boolean;
+  sensitive?: boolean;
   tone: "erp" | "camy" | "corporate" | "feedback" | "aerosoft" | "costing" | "acservice";
 };
 
@@ -30,8 +31,9 @@ export const projects: Project[] = [
     category: "ERP Systems",
     secondaryCategories: ["Business Systems"],
     tags: ["ERP", "Finance", "Procurement", "Manufacturing"],
-    image: "/images/projects/covers/enterprise-erp.png",
+    image: "/images/projects/covers/enterprise_erp_systems.png",
     imageCandidates: [
+      "/images/projects/covers/enterprise_erp_systems.png",
       "/images/projects/covers/enterprise-erp.png",
       "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_03 PM - 1.png",
       "/images/ChatGPT Image Nov 3, 2026, 02_28_03 PM - 1.png",
@@ -59,8 +61,9 @@ export const projects: Project[] = [
     category: "Business Systems",
     secondaryCategories: ["Web Applications", "E-Commerce"],
     tags: ["Entrepreneur Platform", "COD", "Stock", "Payouts"],
-    image: "/images/projects/covers/camy-market.png",
+    image: "/images/projects/covers/camy_entrepreneurs_digital_platform.png",
     imageCandidates: [
+      "/images/projects/covers/camy_entrepreneurs_digital_platform.png",
       "/images/projects/covers/camy-market.png",
       "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_05 PM - 2.png",
       "/images/ChatGPT Image Nov 3, 2026, 02_28_05 PM - 2.png",
@@ -117,8 +120,9 @@ export const projects: Project[] = [
     category: "Business Systems",
     secondaryCategories: ["Mobile Applications"],
     tags: ["QR Feedback", "Hospitality", "Firebase", "Web & Mobile"],
-    image: "/images/projects/covers/guest-feedback.png",
+    image: "/images/projects/covers/guest_feedback_management_system.png",
     imageCandidates: [
+      "/images/projects/covers/guest_feedback_management_system.png",
       "/images/projects/covers/guest-feedback.png",
       "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_08 PM - 4.png",
       "/images/ChatGPT Image Nov 3, 2026, 02_28_08 PM - 4.png",
@@ -142,8 +146,9 @@ export const projects: Project[] = [
     description: "A database-backed finance, manufacturing and management ERP designed around controlled workflows, inventory movements and accounting integrity.",
     category: "ERP Systems",
     tags: ["ERP", "Manufacturing", "Finance", "Inventory"],
-    image: "/images/projects/covers/aerosoft360.png",
+    image: "/images/projects/covers/aerosoft360_erp_dashboard_hero.png",
     imageCandidates: [
+      "/images/projects/covers/aerosoft360_erp_dashboard_hero.png",
       "/images/projects/covers/aerosoft360.png",
       "/images/projects/ChatGPT Image Nov 3, 2026, 02_28_10 PM - 5.png",
       "/images/ChatGPT Image Nov 3, 2026, 02_28_10 PM - 5.png",
@@ -168,8 +173,9 @@ export const projects: Project[] = [
     description: "An internal business system for shipment costing, shared expense allocation, landed-cost calculation, pricing and margin analysis.",
     category: "Business Systems",
     tags: ["Costing", "Pricing", "Margin Analysis", "Reporting"],
-    image: "/images/projects/covers/supun-costing-tracking.png",
+    image: "/images/projects/supun_group_costing_pricing_system.png",
     imageCandidates: [
+      "/images/projects/supun_group_costing_pricing_system.png",
       "/images/projects/covers/supun-costing-tracking.png",
       "/images/projects/supun-costing-tracking.png",
     ],
@@ -187,6 +193,7 @@ export const projects: Project[] = [
     solution: "A structured costing workspace brings shared expenses, landed costs, price calculations and reporting together.",
     impact: "Supports clearer cost visibility and more consistent pricing decisions.",
     businessArea: "Internal costing, pricing and financial operations",
+    sensitive: true,
     tone: "costing",
   },
   {
@@ -195,8 +202,9 @@ export const projects: Project[] = [
     description: "An internal operations workspace to organize AC customer records, installations, service schedules, payments and complaint follow-up.",
     category: "Business Systems",
     tags: ["AC Services", "Installations", "Maintenance", "Customer Support"],
-    image: "/images/projects/covers/ac-service-management.png",
+    image: "/images/projects/ac_service_management_dashboard_hero.png",
     imageCandidates: [
+      "/images/projects/ac_service_management_dashboard_hero.png",
       "/images/projects/covers/ac-service-management.png",
       "/images/projects/ac-service-management.png",
     ],
@@ -214,6 +222,7 @@ export const projects: Project[] = [
     solution: "A unified service-management workspace connects customer, equipment, maintenance and support records.",
     impact: "Supports better service coordination and follow-up.",
     businessArea: "Internal air-conditioning sales and after-sales operations",
+    sensitive: true,
     tone: "acservice",
   },
 ];
