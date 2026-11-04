@@ -72,7 +72,7 @@ export function ProjectCard({ project, onOpen, index = 0, className = "" }: { pr
       transition={{ duration: 0.45, delay: index * 0.045 }}
       whileHover={{ y: -9, rotateX: 1.2, rotateY: index % 2 === 0 ? 1.2 : -1.2 }}
       style={{ transformPerspective: 1200 }}
-      className={`group relative flex h-full min-h-[480px] w-full min-w-0 max-w-full flex-col overflow-hidden rounded-[32px] border border-white/75 bg-white/64 shadow-[0_22px_70px_rgba(30,80,150,0.11)] backdrop-blur-2xl transition-[border-color,background-color,box-shadow] duration-500 hover:bg-white/80 ${toneGlow[project.tone]} ${className}`}
+      className={`group relative flex h-[550px] w-full min-w-0 max-w-full flex-col overflow-hidden rounded-[32px] border border-white/75 bg-white/64 shadow-[0_22px_70px_rgba(30,80,150,0.11)] backdrop-blur-2xl transition-[border-color,background-color,box-shadow] duration-500 hover:bg-white/80 ${toneGlow[project.tone]} ${className}`}
     >
       <div className="pointer-events-none absolute -right-16 -top-16 z-10 h-40 w-40 rounded-full bg-cyan-300/20 blur-3xl transition duration-700 group-hover:scale-125 group-hover:bg-blue-400/25" />
       <div className="pointer-events-none absolute inset-x-10 top-0 z-20 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50 transition-opacity duration-500 group-hover:opacity-100" />

@@ -213,21 +213,21 @@ export default function Projects() {
   };
 
   return (
-    <main className="relative overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f4f9ff_54%,#ffffff_100%)] pb-20">
+    <main className="relative w-full max-w-full overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f4f9ff_54%,#ffffff_100%)] pb-20">
       <div aria-hidden="true" className="pointer-events-none absolute -left-32 top-40 h-[30rem] w-[30rem] rounded-full bg-blue-300/14 blur-3xl" />
       <div aria-hidden="true" className="pointer-events-none absolute -right-32 top-60 h-[34rem] w-[34rem] rounded-full bg-cyan-300/14 blur-3xl" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[46rem] bg-[radial-gradient(circle_at_50%_10%,rgba(18,103,244,.08),transparent_42%)]" />
 
-      <section className="relative mx-auto max-w-[1440px] px-5 pb-8 pt-16 text-center sm:px-8 lg:px-10 lg:pt-20">
+      <section className="relative mx-auto w-full min-w-0 max-w-[1440px] px-5 pb-8 pt-16 text-center sm:px-8 lg:px-10 lg:pt-20">
         <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <div className="inline-flex items-center gap-4 text-xs font-black uppercase tracking-[0.22em] text-blue-600"><i className="h-px w-12 bg-blue-400" /><span>Our Projects</span><i className="h-px w-12 bg-blue-400" /></div>
-          <h1 className="mt-4 text-4xl font-extrabold tracking-[-0.055em] text-[#071a45] sm:text-5xl lg:text-6xl">Featured <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">Projects</span></h1>
+          <h1 className="mt-4 text-3xl font-extrabold tracking-[-0.055em] text-[#071a45] sm:text-5xl lg:text-6xl">Featured <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">Projects</span></h1>
           <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">A showcase of key solutions, from corporate websites to business systems and digital platforms.</p>
         </motion.div>
       </section>
 
-      <section className="relative mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-10">
-        <div className="overflow-hidden rounded-[26px] border border-white/90 bg-white/72 p-2.5 shadow-[0_18px_55px_rgba(18,103,244,0.09)] backdrop-blur-xl">
+      <section className="relative mx-auto w-full min-w-0 max-w-[1240px] px-5 sm:px-8 lg:px-10">
+        <div className="w-full min-w-0 max-w-full overflow-hidden rounded-[26px] border border-white/90 bg-white/72 p-2.5 shadow-[0_18px_55px_rgba(18,103,244,0.09)] backdrop-blur-xl">
           <div className="flex min-w-0 gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {filters.map((filter) => (
               <button key={filter} onClick={() => changeFilter(filter)} className={`relative shrink-0 whitespace-nowrap rounded-full px-5 py-3 text-sm font-extrabold transition-all duration-300 sm:flex-1 ${active === filter ? "bg-gradient-to-r from-[#1267F4] to-[#00A7FF] text-white shadow-[0_10px_26px_rgba(18,103,244,0.25)]" : "border border-slate-200/70 bg-white/72 text-slate-600 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"}`}>
@@ -238,7 +238,7 @@ export default function Projects() {
         </div>
       </section>
 
-      <section className="relative mx-auto mt-10 max-w-[1440px] px-5 sm:px-12 lg:px-16">
+      <section className="relative mx-auto mt-10 w-full min-w-0 max-w-[1440px] px-5 sm:px-12 lg:px-16">
         <button onClick={() => goTo(current - 1)} aria-label="Previous project" className="absolute left-1 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-blue-100 bg-white/90 text-[#071a45] shadow-[0_12px_32px_rgba(18,103,244,0.16)] backdrop-blur-xl transition hover:scale-105 hover:bg-blue-600 hover:text-white sm:left-2"><ChevronLeft size={24} /></button>
         <button onClick={() => goTo(current + 1)} aria-label="Next project" className="absolute right-1 top-1/2 z-20 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-blue-100 bg-white/90 text-[#071a45] shadow-[0_12px_32px_rgba(18,103,244,0.16)] backdrop-blur-xl transition hover:scale-105 hover:bg-blue-600 hover:text-white sm:right-2"><ChevronRight size={24} /></button>
 
@@ -250,9 +250,9 @@ export default function Projects() {
           onFocusCapture={() => setPaused(true)}
           onBlurCapture={() => setPaused(false)}
           onScroll={syncCurrentSlide}
-          initial={{ opacity: 0, y: 16 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
-          className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-1 pb-8 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex w-full min-w-0 max-w-full snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-8 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {visible.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} onOpen={setSelected} className="snap-start shrink-0 basis-full md:basis-[calc((100%-1.5rem)/2)] xl:basis-[calc((100%-3rem)/3)]" />
@@ -267,9 +267,9 @@ export default function Projects() {
       </section>
 
       <motion.section
-        className="relative mx-auto mt-16 max-w-[1320px] px-5 sm:px-8 lg:px-10"
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        className="relative mx-auto mt-16 w-full min-w-0 max-w-[1320px] px-5 sm:px-8 lg:px-10"
+        initial={false}
+        animate={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="mb-7 text-center">
