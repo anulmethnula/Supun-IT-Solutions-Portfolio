@@ -76,23 +76,23 @@ export default function AboutPage() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10 min-w-0"
         >
-          <div className="mb-6 flex items-center gap-3 text-xs font-extrabold tracking-[0.24em] text-[#1267F4] sm:text-sm">
+          <div className="mb-8 flex items-center gap-3 text-xs font-extrabold tracking-[0.24em] text-[#1267F4] sm:text-sm">
             <span>ABOUT SUPUN IT SOLUTIONS</span>
             <span className="h-px w-12 bg-gradient-to-r from-[#1267F4] to-[#00A7FF]" />
           </div>
 
-          <h1 className="max-w-[720px] text-[2.5rem] font-extrabold leading-[0.98] tracking-[-0.055em] sm:text-[clamp(3rem,5.6vw,6rem)] sm:leading-[0.96]">
+          <h1 className="max-w-[720px] text-[2.5rem] font-extrabold leading-[1.08] tracking-[-0.045em] sm:text-[clamp(3rem,5vw,5.25rem)] sm:leading-[1.06]">
             We Are Part of{" "}
             <span className="bg-gradient-to-r from-[#1267F4] to-[#00A7FF] bg-clip-text text-transparent">
               Supun Group of Companies
             </span>
           </h1>
 
-          <p className="mt-7 max-w-[700px] text-lg leading-8 text-[#53627C] md:text-xl">
+          <p className="mt-9 max-w-[680px] text-lg leading-8 text-[#53627C] md:text-xl md:leading-9">
             Supun IT Solutions builds and supports digital systems, web applications, ERP solutions and internal tools across the Supun Group of Companies.
           </p>
 
-          <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-[#1267F4]/15 bg-white/75 px-5 py-3 font-extrabold text-[#071A45] shadow-[0_12px_35px_rgba(18,103,244,.10)] backdrop-blur-xl">
+          <div className="mt-10 inline-flex items-center gap-3 rounded-full border border-[#1267F4]/15 bg-white/75 px-5 py-3 font-extrabold text-[#071A45] shadow-[0_12px_35px_rgba(18,103,244,.10)] backdrop-blur-xl">
             <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-[#1267F4] to-[#00A7FF] text-white">
               <Sparkles size={18} />
             </span>
@@ -198,16 +198,16 @@ export default function AboutPage() {
       </section>
 
       <section className="relative mx-auto grid max-w-[1500px] gap-6 px-6 pb-24 md:px-10 lg:grid-cols-[0.92fr_1.08fr]">
-        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#071A45] via-[#0A347D] to-[#1267F4] p-8 text-white shadow-[0_28px_75px_rgba(7,26,69,.22)] md:p-11">
+        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#071A45] via-[#0A347D] to-[#1267F4] p-8 text-white shadow-[0_28px_75px_rgba(7,26,69,.22)] md:p-12">
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full border-[42px] border-white/5" />
           <div className="pointer-events-none absolute bottom-[-7rem] left-[-4rem] h-64 w-[120%] rotate-[-8deg] rounded-[50%] bg-[#00A7FF]/20" />
           <div className="relative">
             <span className="text-xs font-extrabold tracking-[0.22em] text-cyan-200">OUR ROLE</span>
-            <h2 className="mt-4 text-4xl font-extrabold tracking-[-0.045em] md:text-5xl">Supun IT Solutions</h2>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-blue-50/85">
+            <h2 className="mt-6 text-4xl font-extrabold leading-tight tracking-[-0.04em] md:text-5xl">Supun IT Solutions</h2>
+            <p className="mt-8 max-w-xl text-lg leading-9 text-blue-50/85">
               We turn real operational needs into dependable digital products—from ERP and web applications to internal platforms that help teams work with greater clarity and control.
             </p>
-            <div className="mt-9 flex items-center gap-4 rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur-xl">
+            <div className="mt-12 flex items-center gap-5 rounded-2xl border border-white/15 bg-white/10 p-6 backdrop-blur-xl">
               <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white text-[#1267F4]">
                 <Rocket size={23} />
               </span>
@@ -216,12 +216,12 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="relative overflow-hidden rounded-[2rem] border border-[#1267F4]/12 bg-white/75 p-8 shadow-[0_24px_65px_rgba(25,82,145,.10)] backdrop-blur-2xl md:p-11">
+        <div className="relative overflow-hidden rounded-[2rem] border border-[#1267F4]/12 bg-white/75 p-8 shadow-[0_24px_65px_rgba(25,82,145,.10)] backdrop-blur-2xl md:p-12">
           <div className="pointer-events-none absolute right-[-7rem] top-[-7rem] h-72 w-72 rounded-full bg-[#00A7FF]/10 blur-3xl" />
           <span className="relative text-xs font-extrabold tracking-[0.22em] text-[#1267F4]">OUR VISION &amp; VALUES</span>
-          <h2 className="relative mt-4 text-4xl font-extrabold tracking-[-0.045em] md:text-5xl">Progress with purpose.</h2>
+          <h2 className="relative mt-6 text-4xl font-extrabold leading-tight tracking-[-0.04em] md:text-5xl">Progress with purpose.</h2>
 
-          <div className="relative mt-8 grid gap-4 md:grid-cols-3">
+          <div className="relative mt-10 grid gap-5 md:grid-cols-3">
             {values.map((value) => {
               const Icon = value.icon;
               return (
