@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Manrope } from "next/font/google";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Building2, Menu, X } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Building2, Menu, X } from "lucide-react";
 import { navItems, siteConfig } from "@/src/data/site";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-shell" });
@@ -109,6 +109,42 @@ export function Footer() {
   );
 }
 
+function ScrollToTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 700);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  };
+
+  return (
+    <AnimatePresence>
+      {visible ? (
+        <motion.button
+          type="button"
+          aria-label="Scroll back to top"
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-5 z-[90] grid h-13 w-13 place-items-center rounded-2xl border border-white/80 bg-gradient-to-br from-[#1267F4] to-[#00A7FF] text-white shadow-[0_16px_40px_rgba(18,103,244,.32)] backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-[0_20px_48px_rgba(18,103,244,.42)] sm:bottom-8 sm:right-8"
+          initial={{ opacity: 0, y: 16, scale: 0.85 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 12, scale: 0.85 }}
+          whileHover={{ rotate: -4 }}
+          transition={{ duration: 0.25 }}
+        >
+          <ArrowUp size={22} strokeWidth={2.5} />
+        </motion.button>
+      ) : null}
+    </AnimatePresence>
+  );
+}
+
 export function SiteShell({ children }: { children: React.ReactNode }) {
-  return <><Navbar /><main>{children}</main><Footer /></>;
+  return <><Navbar /><main>{children}</main><Footer /><ScrollToTopButton /></>;
 }

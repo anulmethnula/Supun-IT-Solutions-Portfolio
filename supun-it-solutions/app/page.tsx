@@ -1,6 +1,7 @@
 import { ArrowUpRight, BriefcaseBusiness, Code2, Layers3, ShoppingCart } from "lucide-react";
-import { PrimaryButton, Reveal, SecondaryButton } from "@/src/components/ui";
-import { VideoPlayer } from "@/src/components/video-player";
+import Link from "next/link";
+import { PrimaryButton, Reveal } from "@/src/components/ui";
+import { CinematicHeroVideo } from "@/src/components/video-player";
 import AboutPage from "@/app/about/page";
 import Projects from "@/app/projects/page";
 import Team from "@/app/team/page";
@@ -19,64 +20,53 @@ export default function Home() {
   return (
     <div className="overflow-hidden bg-white">
       <div id="home" className="portfolio-section">
-      <section className="relative mx-auto max-w-[1500px] px-5 pb-14 pt-20 sm:px-8 lg:px-10 lg:pb-20 lg:pt-24">
-        <div aria-hidden="true" className="pointer-events-none absolute -left-28 top-10 h-[34rem] w-[34rem] rounded-full bg-blue-300/15 blur-3xl" />
-        <div aria-hidden="true" className="pointer-events-none absolute -right-28 top-28 h-[38rem] w-[38rem] rounded-full bg-cyan-300/15 blur-3xl" />
+        <section className="relative isolate flex min-h-[calc(100svh-88px)] items-center overflow-hidden bg-[#04122f]">
+          <CinematicHeroVideo />
+          <div aria-hidden="true" className="absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(3,13,39,.95)_0%,rgba(4,20,55,.84)_44%,rgba(4,20,55,.43)_72%,rgba(3,13,39,.60)_100%)]" />
+          <div aria-hidden="true" className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_72%_40%,rgba(0,167,255,.14),transparent_35%)]" />
 
-        <div className="relative grid items-center gap-12 lg:grid-cols-[0.88fr_1.12fr] xl:gap-16">
-          <div>
-            <div className="inline-flex items-center gap-3 rounded-full border border-blue-100 bg-white/75 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-blue-600 shadow-sm backdrop-blur-xl">
-              <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_0_5px_rgba(34,211,238,.12)]" />
-              Supun IT Solutions
-            </div>
+          <div className="relative z-20 mx-auto w-full max-w-[1500px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+            <Reveal className="max-w-[850px]">
+              <div className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/8 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-cyan-200 shadow-lg backdrop-blur-xl">
+                <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_0_5px_rgba(103,232,249,.12)]" />
+                Supun IT Solutions
+              </div>
 
-            <h1 className="mt-6 max-w-3xl text-5xl font-extrabold leading-[0.98] tracking-[-0.06em] text-slate-950 sm:text-6xl lg:text-7xl xl:text-[5.4rem]">
-              Building digital systems that <span className="bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-500 bg-clip-text text-transparent">move the business forward.</span>
-            </h1>
+              <h1 className="mt-7 text-5xl font-extrabold leading-[1.01] tracking-[-0.055em] text-white sm:text-6xl lg:text-[4.8rem] xl:text-[5.35rem]">
+                Building digital systems that <span className="bg-gradient-to-r from-[#3B82F6] via-[#1597F5] to-[#35D8FF] bg-clip-text text-transparent">move the business forward.</span>
+              </h1>
 
-            <p className="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">We design and build ERP systems, web applications and digital platforms for real operations across the Supun Group of Companies.</p>
+              <p className="mt-7 max-w-2xl text-base leading-8 text-blue-50/82 sm:text-lg">We design and build digital solutions for real operations across the Supun Group of Companies.</p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <PrimaryButton href="/#projects">View Projects</PrimaryButton>
-              <SecondaryButton href="/#team">Meet Our Team</SecondaryButton>
-            </div>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <PrimaryButton href="/#projects">View Projects</PrimaryButton>
+                <Link href="/#team" className="inline-flex items-center justify-center rounded-[13px] border border-white/30 bg-white/10 px-6 py-3.5 font-extrabold text-white shadow-lg backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-white/50 hover:bg-white/18">Meet Our Team</Link>
+              </div>
+            </Reveal>
+          </div>
+        </section>
 
+        <section className="relative mx-auto max-w-[1500px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+          <div className="max-w-3xl">
+            <div className="text-xs font-black uppercase tracking-[0.2em] text-blue-600">What we build</div>
+            <h2 className="mt-4 text-4xl font-extrabold tracking-[-0.045em] text-slate-950 sm:text-5xl">Technology shaped around the way the business actually works.</h2>
+            <p className="mt-4 text-base leading-7 text-slate-600">From internal operations to customer-facing platforms, every system starts with the real business process.</p>
           </div>
 
-          <Reveal className="relative">
-            <div className="absolute inset-8 rounded-[38px] bg-gradient-to-r from-blue-500/20 to-cyan-400/20 blur-3xl" />
-            <div className="relative">
-              <VideoPlayer autoPlay title="Supun IT Solutions • Company Showreel" />
-              <div className="absolute -bottom-5 left-5 right-5 hidden grid-cols-3 gap-2 sm:grid">
-                {["ERP", "Web", "Business"].map((item, index) => <div key={item} className="rounded-2xl border border-white/80 bg-white/82 px-4 py-3 text-center shadow-xl backdrop-blur-xl"><b className="text-sm text-slate-900">{item}</b><p className="mt-0.5 text-[11px] text-slate-500">{index === 0 ? "Operations" : index === 1 ? "Digital Experiences" : "Workflow Systems"}</p></div>)}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="relative mx-auto max-w-[1500px] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-        <div className="max-w-3xl">
-          <div className="text-xs font-black uppercase tracking-[0.2em] text-blue-600">What we build</div>
-          <h2 className="mt-4 text-4xl font-extrabold tracking-[-0.045em] text-slate-950 sm:text-5xl">Technology shaped around the way the business actually works.</h2>
-          <p className="mt-4 text-base leading-7 text-slate-600">From internal operations to customer-facing platforms, every system starts with the real business process.</p>
-        </div>
-
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {services.map(({ icon: Icon, title, text, card, iconStyle, glow }, index) => (
-            <Reveal key={title} delay={index * 0.09} className={`group relative flex min-h-[300px] flex-col items-center justify-center overflow-hidden rounded-[26px] border bg-gradient-to-br ${card} p-8 text-center shadow-[0_16px_45px_rgba(37,99,235,0.10)] backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:shadow-[0_28px_65px_rgba(37,99,235,0.20)]`}>
-              <span aria-hidden="true" className={`absolute -right-12 -top-12 h-44 w-44 rounded-full ${glow} blur-3xl transition duration-500 group-hover:scale-125 group-hover:opacity-90`} />
-              <span aria-hidden="true" className={`absolute -bottom-20 -left-16 h-44 w-44 rounded-full ${glow} opacity-40 blur-3xl`} />
-              <span aria-hidden="true" className="absolute inset-x-12 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-500/45 to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
-              <div className={`relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${iconStyle} text-white shadow-[0_12px_28px_rgba(18,103,244,.18)] transition duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg] group-hover:scale-110`}><Icon size={24} /></div>
-              <h3 className="relative mt-6 text-xl font-extrabold leading-8 text-slate-950">{title}</h3>
-              <p className="relative mt-4 max-w-[270px] text-sm leading-7 text-slate-600">{text}</p>
-              <ArrowUpRight className="absolute right-5 top-5 h-4 w-4 text-blue-300 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-blue-600" />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {services.map(({ icon: Icon, title, text, card, iconStyle, glow }, index) => (
+              <Reveal key={title} delay={index * 0.09} className={`group relative flex min-h-[300px] flex-col items-center justify-center overflow-hidden rounded-[26px] border bg-gradient-to-br ${card} p-8 text-center shadow-[0_16px_45px_rgba(37,99,235,0.10)] backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:shadow-[0_28px_65px_rgba(37,99,235,0.20)]`}>
+                <span aria-hidden="true" className={`absolute -right-12 -top-12 h-44 w-44 rounded-full ${glow} blur-3xl transition duration-500 group-hover:scale-125 group-hover:opacity-90`} />
+                <span aria-hidden="true" className={`absolute -bottom-20 -left-16 h-44 w-44 rounded-full ${glow} opacity-40 blur-3xl`} />
+                <span aria-hidden="true" className="absolute inset-x-12 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-500/45 to-transparent opacity-0 transition duration-500 group-hover:opacity-100" />
+                <div className={`relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${iconStyle} text-white shadow-[0_12px_28px_rgba(18,103,244,.18)] transition duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg] group-hover:scale-110`}><Icon size={24} /></div>
+                <h3 className="relative mt-6 text-xl font-extrabold leading-8 text-slate-950">{title}</h3>
+                <p className="relative mt-4 max-w-[270px] text-sm leading-7 text-slate-600">{text}</p>
+                <ArrowUpRight className="absolute right-5 top-5 h-4 w-4 text-blue-300 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-blue-600" />
+              </Reveal>
+            ))}
+          </div>
+        </section>
       </div>
 
       <ScrollSection id="about"><AboutPage /></ScrollSection>

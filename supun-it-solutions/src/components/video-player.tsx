@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Maximize, Pause, Play, Volume2, VolumeX } from "lucide-react";
+import { motion } from "framer-motion";
 
 const defaultSources = [
   "/videos/hero-video.mp4",
@@ -11,6 +12,64 @@ const defaultSources = [
   "/hero video.mp4",
   "/videos/hero-showreel.webm",
 ];
+
+export function CinematicHeroVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [ready, setReady] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(true);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setReduceMotion(media.matches);
+    updatePreference();
+    media.addEventListener("change", updatePreference);
+    return () => media.removeEventListener("change", updatePreference);
+  }, []);
+
+  useEffect(() => {
+    if (!ready || reduceMotion || !ref.current) return;
+    void ref.current.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+  }, [ready, reduceMotion]);
+
+  const toggle = () => {
+    if (!ref.current || !ready) return;
+    if (playing) ref.current.pause();
+    else void ref.current.play();
+    setPlaying((value) => !value);
+  };
+
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-[#04122f]">
+      <Image src="/images/projects/supun-group/supun-group.png" alt="Supun IT Solutions digital work" fill priority sizes="100vw" className="object-cover" />
+      {!failed ? (
+        <video
+          ref={ref}
+          src="/videos/hero-video.mp4"
+          poster="/images/projects/supun-group/supun-group.png"
+          autoPlay={!reduceMotion}
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}
+          onLoadedData={() => setReady(true)}
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+          onError={() => setFailed(true)}
+        />
+      ) : null}
+
+      <motion.div aria-hidden="true" className="pointer-events-none absolute -bottom-28 -left-[8%] h-48 w-[116%] rounded-[50%] bg-blue-500/18 blur-2xl" animate={reduceMotion ? undefined : { x: [0, 24, 0], scaleY: [1, 1.14, 1] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
+      <motion.div aria-hidden="true" className="pointer-events-none absolute -bottom-36 -left-[12%] h-52 w-[124%] rounded-[50%] bg-cyan-400/18 blur-3xl" animate={reduceMotion ? undefined : { x: [0, -30, 0], scaleY: [1.08, 0.92, 1.08] }} transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }} />
+
+      <button type="button" onClick={toggle} disabled={!ready || failed} aria-label={playing ? "Pause background video" : "Play background video"} className="absolute bottom-6 right-5 z-30 grid h-12 w-12 place-items-center rounded-full border border-white/25 bg-slate-950/35 text-white shadow-xl backdrop-blur-xl transition hover:scale-105 hover:bg-white/15 disabled:opacity-45 sm:bottom-8 sm:right-8">
+        {playing ? <Pause size={19} /> : <Play size={19} className="translate-x-px" />}
+      </button>
+    </div>
+  );
+}
 
 export function VideoPlayer({
   src,
