@@ -18,7 +18,7 @@ export type Project = {
   companies?: string[];
   workflow?: string;
   featured?: boolean;
-  tone: "erp" | "camy" | "corporate" | "feedback" | "aerosoft";
+  tone: "erp" | "camy" | "corporate" | "feedback" | "aerosoft" | "costing" | "acservice";
 };
 
 export const projects: Project[] = [
@@ -161,6 +161,60 @@ export const projects: Project[] = [
     businessArea: "Manufacturing, finance and management",
     workflow: "Supplier → Purchase Order → Approval → GRN → Raw Material Batch Stock → General Ledger",
     tone: "aerosoft",
+  },
+  {
+    id: "supun-costing-tracking",
+    title: "Supun Group Costing & Pricing System",
+    description: "An internal business system for shipment costing, shared expense allocation, landed-cost calculation, pricing and margin analysis.",
+    category: "Business Systems",
+    tags: ["Costing", "Pricing", "Margin Analysis", "Reporting"],
+    image: "/images/projects/covers/supun-costing-tracking.png",
+    imageCandidates: [
+      "/images/projects/covers/supun-costing-tracking.png",
+      "/images/projects/supun-costing-tracking.png",
+    ],
+    imageAlt: "Supun Group Costing and Pricing System portfolio cover",
+    technologies: ["React"],
+    features: [
+      "Shipment and product costing",
+      "Shared cost allocation",
+      "Landed-cost calculation",
+      "Retail and wholesale pricing",
+      "Margin analysis and reporting",
+      "Cost history and audit review",
+    ],
+    businessProblem: "Shipment expenses and product-level pricing need consistent calculations and clear review across purchasing activities.",
+    solution: "A structured costing workspace brings shared expenses, landed costs, price calculations and reporting together.",
+    impact: "Supports clearer cost visibility and more consistent pricing decisions.",
+    businessArea: "Internal costing, pricing and financial operations",
+    tone: "costing",
+  },
+  {
+    id: "ac-service-management",
+    title: "AC Service Management System",
+    description: "An internal operations workspace to organize AC customer records, installations, service schedules, payments and complaint follow-up.",
+    category: "Business Systems",
+    tags: ["AC Services", "Installations", "Maintenance", "Customer Support"],
+    image: "/images/projects/covers/ac-service-management.png",
+    imageCandidates: [
+      "/images/projects/covers/ac-service-management.png",
+      "/images/projects/ac-service-management.png",
+    ],
+    imageAlt: "AC Service Management System portfolio cover",
+    technologies: ["React"],
+    features: [
+      "Customer and AC unit records",
+      "Installation tracking",
+      "Planned and completed services",
+      "Warranty and service history",
+      "Payment tracking",
+      "Complaint and repair follow-up",
+    ],
+    businessProblem: "Customer equipment, installation visits, recurring services and support requests require an organized operational view.",
+    solution: "A unified service-management workspace connects customer, equipment, maintenance and support records.",
+    impact: "Supports better service coordination and follow-up.",
+    businessArea: "Internal air-conditioning sales and after-sales operations",
+    tone: "acservice",
   },
 ];
 
