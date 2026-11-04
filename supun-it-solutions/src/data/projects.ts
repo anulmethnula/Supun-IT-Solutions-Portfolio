@@ -28,7 +28,7 @@ export const projects: Project[] = [
   {
     id: "enterprise-erp",
     title: "Enterprise ERP Systems",
-    subtitle: "CAMY Global Marketing • Fuji Industries • CAMY Smart",
+    subtitle: "CAMY Global Marketing • CAMY Smart",
     description: "Custom ERP solutions connecting finance, procurement, inventory, manufacturing and operational workflows in one controlled business environment.",
     category: "ERP Systems",
     secondaryCategories: ["Business Systems"],
@@ -51,7 +51,7 @@ export const projects: Project[] = [
     solution: "A connected ERP architecture that controls procurement from supplier and purchase order through approval, receiving, batch inventory and accounting.",
     impact: "Creates stronger operational visibility, traceability and financial control across distribution and manufacturing workflows.",
     businessArea: "Group manufacturing and distribution operations",
-    companies: ["CAMY Global Marketing", "Fuji Industries", "CAMY Smart"],
+    companies: ["CAMY Global Marketing", "CAMY Smart"],
     workflow: "Supplier → Purchase Order → Approval → GRN → Raw Material Batch Stock → General Ledger",
     featured: true,
     tone: "erp",
