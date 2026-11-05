@@ -43,7 +43,7 @@ body .team-members-primary .member-card:hover,body .team-members-primary .member
 body .team-members-primary .member-photo{height:370px;margin:12px;border-radius:20px;overflow:hidden;background:linear-gradient(145deg,#f4faff,#dceeff)}
 body .team-members-primary .member-photo img,body .team-members-primary .member-card:nth-child(3) .member-photo img{object-fit:cover;transform:none}
 body .team-members-primary .member-card:nth-child(1) .member-photo img{object-position:center 24%}
-body .team-members-primary .member-card:nth-child(2) .member-photo img{object-position:center 35%}
+body .team-members-primary .member-card:nth-child(2) .member-photo img{object-position:center top;transform-origin:center top}
 body .team-members-primary .member-card:nth-child(3) .member-photo img{object-position:center 25%}
 body .team-members-primary .member-card:hover .member-photo img,body .team-members-primary .member-card:nth-child(3):hover .member-photo img{transform:scale(1.025)}
 body .team-members-primary .photo-curve{display:none}
@@ -53,6 +53,7 @@ body .team-members-primary .member-copy>p{min-height:auto;margin:5px 0 14px}
 body .team-members-primary .member-copy .team-socials{padding-top:13px}
 body .team-page-v2 .team-members-primary{width:min(100%,1180px);margin-top:52px}
 body .team-page-v2 .team-members-primary .member-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:44px;align-items:start}
+body .team-page-v2 .team-members-primary .member-grid-balanced{grid-template-columns:repeat(2,minmax(0,455px));justify-content:center;gap:56px}
 body .team-page-v2 .team-members-primary .member-card,body .team-page-v2 .team-members-primary .member-card:nth-child(2){display:block;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;transform:none!important}
 body .team-page-v2 .team-members-primary .member-card:hover,body .team-page-v2 .team-members-primary .member-card:nth-child(2):hover{border:0;background:transparent;box-shadow:none;transform:none!important}
 body .team-page-v2 .team-members-primary .member-photo{height:410px;margin:0;overflow:hidden;border:0;border-radius:24px;background:linear-gradient(145deg,#f7fbff,#e6f3ff);box-shadow:0 14px 34px rgba(17,82,160,.1);transition:box-shadow .35s ease}
@@ -74,7 +75,7 @@ body .team-page-v2 .team-socials .social-link.portfolio{color:#1267f4;background
 body .team-page-v2 .team-socials .social-link.portfolio:hover{color:#fff;background:linear-gradient(135deg,#1267f4,#00a7ff);border-color:transparent;transform:translateY(-2px) scale(1.06);box-shadow:0 8px 20px rgba(18,103,244,.24)}
 @media(min-width:1051px){body .team-page-v2 .capability-cards>div{position:relative}body .team-page-v2 .capability-cards>div:not(:last-child):after{content:"→";position:absolute;z-index:3;right:-14px;top:50%;width:18px;display:grid;place-items:center;color:rgba(18,103,244,.38);font-size:17px;font-weight:500;line-height:1;transform:translateY(-50%)}}
 body .team-page-v2 .team-members-primary .photo-curve,body .team-page-v2 .team-members-primary .member-card:before{display:none}
-@media(max-width:1050px){body .team-page-v2 .team-members-primary .member-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:50px 34px}body .team-page-v2 .team-members-primary .member-card:last-child{grid-column:1/-1;width:min(100%,360px);justify-self:center}}
+@media(max-width:1050px){body .team-page-v2 .team-members-primary .member-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:50px 34px}body .team-page-v2 .team-members-primary .member-card:last-child{grid-column:1/-1;width:min(100%,360px);justify-self:center}body .team-page-v2 .team-members-primary .member-grid-balanced .member-card:last-child{grid-column:auto;width:auto;justify-self:stretch}}
 @media(max-width:700px){body .team-page-v2 .team-members-primary{margin-top:42px}body .team-page-v2 .team-members-primary .member-grid{grid-template-columns:1fr;gap:46px}body .team-page-v2 .team-members-primary .member-card:last-child{grid-column:auto;width:auto}body .team-page-v2 .team-members-primary .member-photo{height:430px}body .team-page-v2 .team-members-primary .member-copy{margin:0;padding:19px 3px 0}}
 @media(max-width:700px){body .team-members-primary .member-photo{height:390px}body .team-members-primary .member-copy{margin:-32px 18px 18px}}
 html{scroll-padding-top:96px}.portfolio-section{position:relative;scroll-margin-top:96px}.portfolio-section:not(:first-child){border-top:1px solid rgba(18,103,244,.07)}

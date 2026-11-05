@@ -16,7 +16,7 @@ export default function Team() {
       <Eyebrow>OUR TEAM</Eyebrow><h1>The People Behind <em>Supun IT Solutions</em></h1>
     </motion.header>
     <main className="team-v2-content">
-      <section className="team-members-section team-members-primary"><div className="meet-heading"><h2>Meet the Team</h2><p>Business, development and creative expertise working together from idea to implementation.</p></div><div className="member-grid">{teamMembers.map((member,index)=><TeamMemberCard member={member} index={index} key={member.name} />)}</div></section>
+      <section className="team-members-section team-members-primary"><div className="meet-heading"><h2>Meet the Team</h2><p>Business, development and creative expertise working together from idea to implementation.</p></div><div className={`member-grid${teamMembers.length === 2 ? " member-grid-balanced" : ""}`}>{teamMembers.map((member,index)=><TeamMemberCard member={member} index={index} key={member.name} />)}</div></section>
       <TeamCapabilities />
     </main>
   </div>;
