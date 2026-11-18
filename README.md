@@ -10,7 +10,7 @@
 
 A modern, responsive, single-page portfolio showcasing our company, selected software projects, team, technology stack, and contact information.
 
-[Explore the website sections](#website-sections) · [Our projects](#selected-projects) · [Supun Group](https://supuncompanies.com/) · [Contact](mailto:info@supungroup.lk)
+[Live website](https://it.supuncompanies.com/) · [Explore the website sections](#website-sections) · [Our projects](#selected-projects) · [Supun Group](https://supuncompanies.com/) · [Contact](mailto:info@supungroup.lk)
 
 ![React](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-16-071A45?logo=nextdotjs&logoColor=white)
@@ -116,6 +116,7 @@ Supun-IT-Solutions-Portfolio/
 ├── .github/
 │   └── assets/            # README banner
 ├── README.md              # Repository overview
+├── docs/                  # Reference documents
 └── supun-it-solutions/
     ├── app/               # Pages and global styles
     ├── public/            # Company images, project covers, videos, logos
@@ -140,6 +141,7 @@ Please avoid committing confidential credentials or sensitive operational inform
 **Supun IT Solutions** — part of **Supun Group of Companies**
 
 **Email:** [info@supungroup.lk](mailto:info@supungroup.lk)  
+**IT solutions website:** [it.supuncompanies.com](https://it.supuncompanies.com/)  
 **Group website:** [supuncompanies.com](https://supuncompanies.com/)
 
 ---
